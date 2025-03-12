@@ -29,33 +29,33 @@ public class commandManager implements CommandExecutor {
         for(int i = 0; i < getCommandStruct().size(); i++) { //loop over commands to see if the passed command exists
             if(args[0].equalsIgnoreCase(getCommandStruct().get(i).getName())) { // ^^
 
-                String usage = getCommandStruct().get(i).usageArea(); //get expected usage
 
 
 
                 if(args[0].equalsIgnoreCase("help")) { // Simple help command, this coveres commands with the same command type as args 1
-                if(!(args[1].equalsIgnoreCase(""))) {
-                    for (int j = 0; j < getCommandStruct().size(); j++) {
-                        if(getCommandStruct().get(j).commandType().equalsIgnoreCase(args[1])) {
+                    if (!args[1].equalsIgnoreCase("")) {
+                        for (int j = 0; j < getCommandStruct().size(); j++) {
+                            if(getCommandStruct().get(j).commandType().equalsIgnoreCase(args[1])) {
+                                commandSender.sendMessage("/" + getCommandStruct().get(j).getName() + " - " + getCommandStruct().get(j).getDescription());
+                                return true;
+                            }
+                        }
+                    } else { // else it just returns all the commands
+                        for (int j = 0; j < getCommandStruct().size(); j++) { //Loops over each command for the size od getCommandStruct
                             commandSender.sendMessage("/" + getCommandStruct().get(j).getName() + " - " + getCommandStruct().get(j).getDescription());
-                            return true;
+                            //gets the command name and description at the array position of the array
                         }
                     }
-                } else { // else it just returns all the commands
-                    for (int j = 0; j < getCommandStruct().size(); j++) { //Loops over each command for the size od getCommandStruct
-                        commandSender.sendMessage("/" + getCommandStruct().get(j).getName() + " - " + getCommandStruct().get(j).getDescription());
-                        //gets the command name and description at the array position of the array
-                    }
-                }
                     return true;
                 }
 
-                if(commandSender instanceof Player player && (usage.equalsIgnoreCase("player") || usage.equalsIgnoreCase("all"))) {
-                    getCommandStruct().get(i).commandRun(commandSender, args, usage); //check if player is running player or all command
-                } else if (!(commandSender instanceof Player) && usage.equalsIgnoreCase("console")) {
-                    getCommandStruct().get(i).commandRun(commandSender, args, usage);
+
+
+                if(commandSender instanceof Player player) {
+
+                    getCommandStruct().get(i).commandRun(commandSender, args);
                 } else {
-                    commandSender.sendMessage("You cannot run this command"); //Edge case
+                    commandSender.sendMessage("You cannot run cider commands in the console");
                 }
 
 
@@ -70,5 +70,6 @@ public class commandManager implements CommandExecutor {
     public ArrayList<commandStruct> getCommandStruct() {
         return commandStruct;
     } // returns the command list
+
 }
 

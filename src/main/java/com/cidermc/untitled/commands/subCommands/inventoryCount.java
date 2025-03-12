@@ -4,6 +4,9 @@ import com.cidermc.untitled.commands.commandStruct;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static java.lang.Boolean.valueOf;
+import static org.bukkit.Bukkit.getServer;
+
 public class inventoryCount extends commandStruct {
     @Override
     public String getName() {
@@ -25,22 +28,26 @@ public class inventoryCount extends commandStruct {
         return "/cider inventorycount";
     }
 
-    @Override
-    public String usageArea() {
-        return "player";
-    }
 
     @Override
-    public void commandRun(CommandSender commandSender, String[] args, String usage) {
+    public void commandRun(CommandSender commandSender, String[] args) {
         Player player = (Player) commandSender;
         if (player.hasPermission("cider.inventorycount")) {
             player.sendMessage("You dont have permission to do this");
             return;
         }
 
-        String inventoryCount = String.valueOf(player.getInventory().getSize());
-        player.sendMessage("You have: " + inventoryCount + " items in your inventory");
-
+        if(valueOf(args[0])) {
+            if(getServer().getOnlinePlayers().contains(args[0])) {
+                String inventoryCount = String.valueOf(player.getInventory().getSize());
+                player.sendMessage("Player has: " + inventoryCount + " items in their inventory");
+            } else {
+                player.sendMessage("Player is not online");
+            }
+        } else {
+            String inventoryCount = String.valueOf(player.getInventory().getSize());
+            player.sendMessage("You have: " + inventoryCount + " items in your inventory");
+        }
     }
 
 }
