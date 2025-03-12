@@ -13,7 +13,9 @@ import java.util.Locale;
 
 public class commandManager implements CommandExecutor {
 
-    private ArrayList<commandStruct> commandStruct = new ArrayList<>(); //list of all commands
+    private final ArrayList<commandStruct> commandStruct = new ArrayList<>() {
+
+    }; //list of all commands
 
     public commandManager() {
         commandStruct.add(new inventoryCount()); //adds inventoryCount command to command structure
@@ -45,5 +47,5 @@ public class commandManager implements CommandExecutor {
 
     public ArrayList<commandStruct> getCommandStruct() {
         return commandStruct;
-    } // returns the command listit
+    } // returns the command list
 }
