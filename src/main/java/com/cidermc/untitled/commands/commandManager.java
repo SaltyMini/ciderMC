@@ -31,9 +31,9 @@ public class commandManager implements CommandExecutor {
                 String usage = getCommandStruct().get(i).usageArea(); //get expected usage
 
                 if(commandSender instanceof Player player && (usage.equalsIgnoreCase("player") || usage.equalsIgnoreCase("all"))) {
-                    getCommandStruct().get(i).commandRun(commandSender, args); //check if player is running player or all command
+                    getCommandStruct().get(i).commandRun(commandSender, args, usage); //check if player is running player or all command
                 } else if (!(commandSender instanceof Player) && usage.equalsIgnoreCase("console")) {
-                    getCommandStruct().get(i).commandRun(commandSender, args);
+                    getCommandStruct().get(i).commandRun(commandSender, args, usage);
                 } else {
                     commandSender.sendMessage("You cannot run this command"); //Edge case
                 }

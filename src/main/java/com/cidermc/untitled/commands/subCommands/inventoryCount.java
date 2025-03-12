@@ -26,7 +26,7 @@ public class inventoryCount extends commandStruct {
     }
 
     @Override
-    public void commandRun(CommandSender commandSender, String[] args) {
+    public void commandRun(CommandSender commandSender, String[] args, String usage) {
         Player player = (Player) commandSender;
         if (player.hasPermission("cider.inventorycount")) {
             player.sendMessage("You dont have permission to do this");
