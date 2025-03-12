@@ -30,6 +30,15 @@ public class commandManager implements CommandExecutor {
 
                 String usage = getCommandStruct().get(i).usageArea(); //get expected usage
 
+                if(args[0].equalsIgnoreCase("help")) { // Simple help command
+                    commandSender.sendMessage("Commands:");
+                    for(int j = 0; j < getCommandStruct().size(); j++) { //Loops over each command for the size od getCommandStruct
+                        commandSender.sendMessage("/" + getCommandStruct().get(j).getName() + " - " + getCommandStruct().get(j).getDescription());
+                        //gets the command name and description at the array position of the array
+                    }
+                    return true;
+                }
+
                 if(commandSender instanceof Player player && (usage.equalsIgnoreCase("player") || usage.equalsIgnoreCase("all"))) {
                     getCommandStruct().get(i).commandRun(commandSender, args, usage); //check if player is running player or all command
                 } else if (!(commandSender instanceof Player) && usage.equalsIgnoreCase("console")) {
