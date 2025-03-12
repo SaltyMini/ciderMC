@@ -16,6 +16,11 @@ public class inventoryCount extends commandStruct {
     }
 
     @Override
+    public String commandType() {
+        return "fun";
+    }
+
+    @Override
     public String getSyntax() {
         return "/cider inventorycount";
     }

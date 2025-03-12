@@ -21,8 +21,9 @@ public class commandManager implements CommandExecutor {
         commandStruct.add(new inventoryCount()); //adds inventoryCount command to command structure
     }
 
+
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
+    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label,  String[] @NotNull args) {
 
 
         for(int i = 0; i < getCommandStruct().size(); i++) { //loop over commands to see if the passed command exists
@@ -30,12 +31,22 @@ public class commandManager implements CommandExecutor {
 
                 String usage = getCommandStruct().get(i).usageArea(); //get expected usage
 
-                if(args[0].equalsIgnoreCase("help")) { // Simple help command
-                    commandSender.sendMessage("Commands:");
-                    for(int j = 0; j < getCommandStruct().size(); j++) { //Loops over each command for the size od getCommandStruct
+
+
+                if(args[0].equalsIgnoreCase("help")) { // Simple help command, this coveres commands with the same command type as args 1
+                if(!(args[1].equalsIgnoreCase(""))) {
+                    for (int j = 0; j < getCommandStruct().size(); j++) {
+                        if(getCommandStruct().get(j).commandType().equalsIgnoreCase(args[1])) {
+                            commandSender.sendMessage("/" + getCommandStruct().get(j).getName() + " - " + getCommandStruct().get(j).getDescription());
+                            return true;
+                        }
+                    }
+                } else { // else it just returns all the commands
+                    for (int j = 0; j < getCommandStruct().size(); j++) { //Loops over each command for the size od getCommandStruct
                         commandSender.sendMessage("/" + getCommandStruct().get(j).getName() + " - " + getCommandStruct().get(j).getDescription());
                         //gets the command name and description at the array position of the array
                     }
+                }
                     return true;
                 }
 
@@ -46,6 +57,8 @@ public class commandManager implements CommandExecutor {
                 } else {
                     commandSender.sendMessage("You cannot run this command"); //Edge case
                 }
+
+
 
             }
 
@@ -58,3 +71,4 @@ public class commandManager implements CommandExecutor {
         return commandStruct;
     } // returns the command list
 }
+

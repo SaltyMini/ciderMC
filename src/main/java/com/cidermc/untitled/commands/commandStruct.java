@@ -7,6 +7,7 @@ public abstract class commandStruct {
 
     public abstract String getName(); //name of command
     public abstract String getDescription(); //description of command
+    public abstract String commandType();
     public abstract String getSyntax(); //correct command syntax
     public abstract String usageArea(); //player/console/all
 
