@@ -1,4 +1,17 @@
-name: untitled
+name: ciderMC
 version: '1.0-SNAPSHOT'
 main: com.cidermc.untitled.main
-api-version: '1.21'
+prefix: cider
+author: Salty
+
+
+commands:
+  inventorysize:
+    description: Count the items in your inventory
+
+permissions:
+  cider.*:
+  cider.countinventory:
+
+permission-message: You do not have permission to use this command.
+usage: "Usage: /cider [args]"
