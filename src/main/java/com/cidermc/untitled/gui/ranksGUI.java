@@ -23,7 +23,7 @@ public class ranksGUI implements Listener {
      * Creates a permission-based item that shows different appearance based on permissions
      */
     public Item createPermissionItem(Material unlockedMaterial, Material lockedMaterial,
-                                     String displayName, String permission, String lore1, String lore2) {
+                                     String displayName, String permission, String lore1, String lore2, String lore3, String lore4, String lore5, String lore6) {
         return new AbstractItem() {
 
             @Override
@@ -71,27 +71,27 @@ public class ranksGUI implements Listener {
             }
         };
     }
-    final Item border = new SimpleItem(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE));
 
     // Creating permission-based rank items
-    Item rank1 = createPermissionItem(Material.DIAMOND, Material.BARRIER, "VIP", "ranks.vip", "", "");
-    Item rank2 = createPermissionItem(Material.GOLD_INGOT, Material.BARRIER, "MVP", "ranks.mvp", "", "");
-    Item rank3 = createPermissionItem(Material.EMERALD, Material.BARRIER, "ELITE", "ranks.elite", "", "");
-    Item rank4 = createPermissionItem(Material.NETHER_STAR, Material.BARRIER, "LEGEND", "ranks.legend", "", "");
-    Item rank5 = createPermissionItem(Material.DRAGON_EGG, Material.BARRIER, "GOD", "ranks.god", "", "");
+    Item rank1 = createPermissionItem(Material.DIAMOND, Material.BARRIER, "Gues", "cider.ranks.guest", "", "", "", "", "", "");
+    Item rank2 = createPermissionItem(Material.GOLD_INGOT, Material.BARRIER, "MVP", "ranks.mvp", "", "", "", "", "", "");
+    Item rank3 = createPermissionItem(Material.EMERALD, Material.BARRIER, "ELITE", "ranks.elite", "", "", "", "", "", "");
+    Item rank4 = createPermissionItem(Material.NETHER_STAR, Material.BARRIER, "LEGEND", "ranks.legend", "", "","", "", "", "");
+    Item rank5 = createPermissionItem(Material.DRAGON_EGG, Material.BARRIER, "GOD", "ranks.god", "", "", "", "", "", "");
 
-    Item rank6 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "SPECIAL1", "ranks.special1", "", "");
-    Item rank7 = createPermissionItem(Material.BEACON, Material.BARRIER, "SPECIAL2", "ranks.special2", "", "");
-    Item rank8 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "SPECIAL3", "ranks.special3", "", "");
-    Item rank9 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "SPECIAL4", "ranks.special4", "", "");
-    Item rank10 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "SPECIAL5", "ranks.special5", "", "");
+    Item rank6 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "SPECIAL1", "ranks.special1", "", "", "", "", "", "");
+    Item rank7 = createPermissionItem(Material.BEACON, Material.BARRIER, "SPECIAL2", "ranks.special2", "", "", "", "", "", "");
+    Item rank8 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "SPECIAL3", "ranks.special3", "", "", "", "", "", "");
+    Item rank9 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "SPECIAL4", "ranks.special4", "", "", "", "", "", "");
+    Item rank10 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "SPECIAL5", "ranks.special5", "", "", "", "", "", "");
 
-    Item rank11 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "SPECIAL1", "ranks.special1", "", "");
-    Item rank12 = createPermissionItem(Material.BEACON, Material.BARRIER, "SPECIAL2", "ranks.special2", "", "");
-    Item rank13 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "SPECIAL3", "ranks.special3", "", "");
-    Item rank14 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "SPECIAL4", "ranks.special4", "", "");
-    Item rank15 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "SPECIAL5", "ranks.special5", "", "");
+    Item rank11 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "SPECIAL1", "ranks.special1", "", "", "", "", "", "");
+    Item rank12 = createPermissionItem(Material.BEACON, Material.BARRIER, "SPECIAL2", "ranks.special2", "", "", "", "", "", "");
+    Item rank13 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "SPECIAL3", "ranks.special3", "", "", "", "", "", "");
+    Item rank14 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "SPECIAL4", "ranks.special4", "", "", "", "", "", "");
+    Item rank15 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "SPECIAL5", "ranks.special5", "", "", "", "", "", "");
 
+    final Item border = new SimpleItem(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE));
     // Build the GUI
     Gui gui = Gui.normal()
             .setStructure(
