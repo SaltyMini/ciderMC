@@ -23,7 +23,7 @@ public class ranksGUI implements Listener {
      * Creates a permission-based item that shows different appearance based on permissions
      */
     public Item createPermissionItem(Material unlockedMaterial, Material lockedMaterial,
-                                     String displayName, String permission, String lore1, String lore2, String lore3, String lore4, String lore5, String lore6) {
+                                     String displayName, String permission, String lore1, String lore2, String lore3, String lore4, String lore5, String lore6, String lore7) {
         return new AbstractItem() {
 
             @Override
@@ -73,23 +73,23 @@ public class ranksGUI implements Listener {
     }
 
     // Creating permission-based rank items
-    Item rank1 = createPermissionItem(Material.DIAMOND, Material.BARRIER, "Gues", "cider.ranks.guest", "", "", "", "", "", "");
-    Item rank2 = createPermissionItem(Material.GOLD_INGOT, Material.BARRIER, "MVP", "cider.ranks.mvp", "", "", "", "", "", "");
-    Item rank3 = createPermissionItem(Material.EMERALD, Material.BARRIER, "ELITE", "ranks.elite", "", "", "", "", "", "");
-    Item rank4 = createPermissionItem(Material.NETHER_STAR, Material.BARRIER, "LEGEND", "ranks.legend", "", "","", "", "", "");
-    Item rank5 = createPermissionItem(Material.DRAGON_EGG, Material.BARRIER, "GOD", "ranks.god", "", "", "", "", "", "");
+    Item rank1 = createPermissionItem(Material.DIAMOND, Material.BARRIER, "Guest", "cider.ranks.guest", "- 1 Home", "- 1 Job", "- /kit Starter", "- /sell", "", "", "");
+    Item rank2 = createPermissionItem(Material.GOLD_INGOT, Material.BARRIER, "Tanner", "cider.ranks.tanner", "- Has all permissions from previous rank", "- +7,500 Claim Blocks","- /pw", "- /poop", "", "", "");
+    Item rank3 = createPermissionItem(Material.EMERALD, Material.BARRIER, "Criminal", "cider.ranks.criminal", "- Has all permissions from previous rank", "- Ability to purchase 2 Lottery Tickets", "- Access to 1 Dungeon Attempt", "- /fart", "- /sit", "", "");
+    Item rank4 = createPermissionItem(Material.NETHER_STAR, Material.BARRIER, "Peasant", "cider.ranks.peasant", "- Has all permissions from previous rank", "- Ability to create shops", "- 3 Homes","- /tptoggle", "- /bottle", "- /crawl", "");
+    Item rank5 = createPermissionItem(Material.DRAGON_EGG, Material.BARRIER, "Farmer", "cider.ranks.farmer", "- Has all permissions from previous rank", "- +2,500 Claim Blocks", "- Ability to purchase 3 Lottery Tickets", "- Ability to purchase plots at the market", "- 2 Jobs", "- /tpahere", "");
 
-    Item rank6 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "SPECIAL1", "ranks.special1", "", "", "", "", "", "");
-    Item rank7 = createPermissionItem(Material.BEACON, Material.BARRIER, "SPECIAL2", "ranks.special2", "", "", "", "", "", "");
-    Item rank8 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "SPECIAL3", "ranks.special3", "", "", "", "", "", "");
-    Item rank9 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "SPECIAL4", "ranks.special4", "", "", "", "", "", "");
-    Item rank10 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "SPECIAL5", "ranks.special5", "", "", "", "", "", "");
+    Item rank6 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "Artist", "cider.ranks.artist", "- Has all permissions from previous rank", "- Ability to purchase 5 Lottery Tickets", "- 1 Seasonal Key", "- 4 Homes", "- /condense", "- /lay", "- /sell hand");
+    Item rank7 = createPermissionItem(Material.BEACON, Material.BARRIER, "Sculptor", "cider.ranks.sculptor", "- Has all permissions from previous rank", "- Ability to purchase 6 Lottery Tickets", "- Ability to sit on top of players", "- Access to 2 Dungeon Attempts", "- /craft", "- /feed (60 second cooldown)", "");
+    Item rank8 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "Priest", "cider.ranks.priest", "- Has all permissions from previous rank", "- +5,000 Claim Blocks", "Ability to set 1 Player Warp", "- 5 Homes", "- 3 Jobs", "- /anvil", "");
+    Item rank9 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "High Priest", "cider.ranks.highpriest", "- Has all permissions from previous rank", "- Ability to purchase 10 Lottery Tickets", "- Ability to list 1 item in /ah", "- 6 Homes", "- /marry", "", "");
+    Item rank10 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "Ronin", "cider.ranks.ronin", "- Has all permissions from previous rank", "- Ability to set 2 Player Warps", "- Access to all balloon cosmetics", "- ", "", "", "");
 
-    Item rank11 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "SPECIAL1", "ranks.special1", "", "", "", "", "", "");
-    Item rank12 = createPermissionItem(Material.BEACON, Material.BARRIER, "SPECIAL2", "ranks.special2", "", "", "", "", "", "");
-    Item rank13 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "SPECIAL3", "ranks.special3", "", "", "", "", "", "");
-    Item rank14 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "SPECIAL4", "ranks.special4", "", "", "", "", "", "");
-    Item rank15 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "SPECIAL5", "ranks.special5", "", "", "", "", "", "");
+    Item rank11 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "Samurai", "cider.ranks.samurai", "- Has all permissions from previous rank", "", "", "", "", "", "");
+    Item rank12 = createPermissionItem(Material.BEACON, Material.BARRIER, "Minister", "cider.ranks.minister", "- Has all permissions from previous rank", "", "", "", "", "", "");
+    Item rank13 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "Shinpan", "cider.ranks.shinpan", "- Has all permissions from previous rank", "", "", "", "", "", "");
+    Item rank14 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "Daimyo", "cider.ranks.daimyo", "- Has all permissions from previous rank", "", "", "", "", "", "");
+    Item rank15 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "Chancellor", "cider.ranks.chancellor", "- Has all permissions from previous rank", "", "", "", "", "", "");
 
     final Item border = new SimpleItem(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE));
     // Build the GUI
