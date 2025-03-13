@@ -91,7 +91,7 @@ public class ranksGUI implements Listener {
         if(clickedItem == null || clickedItem.getType().isAir()) return;
 
         final Player player = (Player) event.getWhoClicked();
-
+/*
         switch(clickedItem.getType()) {
             case IRON_INGOT:
                 player.sendMessage("You clicked Iron");
@@ -99,10 +99,12 @@ public class ranksGUI implements Listener {
             case GOLD_INGOT:
                 player.sendMessage("You clicked Gold");
                 break;
-            case COPPER_INGOT:
+            case COPPER_INGOT:nvm install latest
                 player.sendMessage(("You clicked COpper"));
                 break;
         }
+        */
+
 
     }
 

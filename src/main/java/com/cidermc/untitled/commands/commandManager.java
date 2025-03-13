@@ -7,69 +7,61 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Console;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class commandManager implements CommandExecutor {
 
-    private final ArrayList<commandStruct> commandStruct = new ArrayList<>() {
-
-    }; //list of all commands
+    private final ArrayList<commandStruct> commandStruct = new ArrayList<>(); //list of all commands
 
     public commandManager() {
         commandStruct.add(new inventoryCount()); //adds inventoryCount command to command structure
     }
 
-
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label,  String[] @NotNull args) {
+    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        // Check if args is empty
+        if (args.length == 0) {
+            commandSender.sendMessage("Use /cider help to see available commands");
+            return true;
+        }
 
-
-        for(int i = 0; i < getCommandStruct().size(); i++) { //loop over commands to see if the passed command exists
-            if(args[0].equalsIgnoreCase(getCommandStruct().get(i).getName())) { // ^^
-
-
-
-
-                if(args[0].equalsIgnoreCase("help")) { // Simple help command, this coveres commands with the same command type as args 1
-                    if (!args[1].equalsIgnoreCase("")) {
-                        for (int j = 0; j < getCommandStruct().size(); j++) {
-                            if(getCommandStruct().get(j).getName().equalsIgnoreCase(args[1])) {
-                                commandSender.sendMessage(getCommandStruct().get(j).getSyntax() + " - " + getCommandStruct().get(j).getDescription());
-                                return true;
-                            }
-                        }
-                    } else { // else it just returns all the commands
-                        for (int j = 0; j < getCommandStruct().size(); j++) { //Loops over each command for the size od getCommandStruct
-                            commandSender.sendMessage("/" + getCommandStruct().get(j).getName() + " - " + getCommandStruct().get(j).getDescription());
-                            //gets the command name and description at the array position of the array
-                        }
+        // Handle help command
+        if (args[0].equalsIgnoreCase("help")) {
+            // If there's a second argument, show help for that specific command
+            if (args.length > 1 && !args[1].isEmpty()) {
+                for (commandStruct cmd : getCommandStruct()) {
+                    if (cmd.getName().equalsIgnoreCase(args[1])) {
+                        commandSender.sendMessage(cmd.getSyntax() + " - " + cmd.getDescription());
+                        return true;
                     }
-                    return true;
                 }
+                commandSender.sendMessage("Command not found: " + args[1]);
+            } else { // Otherwise show all commands
+                for (commandStruct cmd : getCommandStruct()) {
+                    commandSender.sendMessage("/" + cmd.getName() + " - " + cmd.getDescription());
+                }
+            }
+            return true;
+        }
 
-
-
-                if(commandSender instanceof Player player) {
-
-                    getCommandStruct().get(i).commandRun(commandSender, args);
+        // Handle other commands
+        for (commandStruct cmd : getCommandStruct()) {
+            if (args[0].equalsIgnoreCase(cmd.getName())) {
+                if (commandSender instanceof Player player) {
+                    cmd.commandRun(commandSender, args);
                 } else {
                     commandSender.sendMessage("You cannot run cider commands in the console");
                 }
-
-
-
+                return true;
             }
-
         }
 
+        // Command not found
+        commandSender.sendMessage("Unknown command. Use /cider help to see available commands");
         return true;
     }
 
     public ArrayList<commandStruct> getCommandStruct() {
         return commandStruct;
     } // returns the command list
-
 }
-
