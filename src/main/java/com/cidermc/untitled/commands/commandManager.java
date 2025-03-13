@@ -35,8 +35,8 @@ public class commandManager implements CommandExecutor {
                 if(args[0].equalsIgnoreCase("help")) { // Simple help command, this coveres commands with the same command type as args 1
                     if (!args[1].equalsIgnoreCase("")) {
                         for (int j = 0; j < getCommandStruct().size(); j++) {
-                            if(getCommandStruct().get(j).commandType().equalsIgnoreCase(args[1])) {
-                                commandSender.sendMessage("/" + getCommandStruct().get(j).getName() + " - " + getCommandStruct().get(j).getDescription());
+                            if(getCommandStruct().get(j).getName().equalsIgnoreCase(args[1])) {
+                                commandSender.sendMessage(getCommandStruct().get(j).getSyntax() + " - " + getCommandStruct().get(j).getDescription());
                                 return true;
                             }
                         }
