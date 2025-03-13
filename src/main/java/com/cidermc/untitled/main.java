@@ -13,7 +13,7 @@ public final class main extends JavaPlugin {
         getCommand("cider").setExecutor(new commandManager());
         getServer().getPluginManager().registerEvents(new playerCountGUI(), this);
         getServer().getPluginManager().registerEvents(new ranksGUI(), this);
-
+    // runs on start
         InvUI.getInstance().setPlugin(this);
     }
 
