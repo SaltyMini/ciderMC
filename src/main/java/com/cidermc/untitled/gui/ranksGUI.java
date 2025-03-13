@@ -74,7 +74,7 @@ public class ranksGUI implements Listener {
 
     // Creating permission-based rank items
     Item rank1 = createPermissionItem(Material.DIAMOND, Material.BARRIER, "Gues", "cider.ranks.guest", "", "", "", "", "", "");
-    Item rank2 = createPermissionItem(Material.GOLD_INGOT, Material.BARRIER, "MVP", "ranks.mvp", "", "", "", "", "", "");
+    Item rank2 = createPermissionItem(Material.GOLD_INGOT, Material.BARRIER, "MVP", "cider.ranks.mvp", "", "", "", "", "", "");
     Item rank3 = createPermissionItem(Material.EMERALD, Material.BARRIER, "ELITE", "ranks.elite", "", "", "", "", "", "");
     Item rank4 = createPermissionItem(Material.NETHER_STAR, Material.BARRIER, "LEGEND", "ranks.legend", "", "","", "", "", "");
     Item rank5 = createPermissionItem(Material.DRAGON_EGG, Material.BARRIER, "GOD", "ranks.god", "", "", "", "", "", "");
