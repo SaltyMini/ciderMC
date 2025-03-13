@@ -1,116 +1,116 @@
 package com.cidermc.untitled.gui;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
+import xyz.xenondevs.invui.gui.Gui;
+import xyz.xenondevs.invui.item.Item;
+import xyz.xenondevs.invui.item.ItemProvider;
+import xyz.xenondevs.invui.item.builder.ItemBuilder;
+import xyz.xenondevs.invui.item.impl.AbstractItem;
+import xyz.xenondevs.invui.item.impl.SimpleItem;
 
-import java.util.Arrays;
+import static java.awt.SystemColor.window;
 
 public class ranksGUI implements Listener {
+    // Border item
+    Item border = new SimpleItem(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE));
 
-    private final Inventory inv;
+    /**
+     * Creates a permission-based item that shows different appearance based on permissions
+     */
+    public Item createPermissionItem(Material unlockedMaterial, Material lockedMaterial,
+                                     String displayName, String permission, String lore1, String lore2) {
+        return new AbstractItem() {
+            @Override
+            public ItemProvider getItemProvider(Player player) {
+                // Check if player has permission
+                boolean hasPermission = player.hasPermission(permission);
 
-    public ranksGUI() {
+                // Create different ItemBuilder based on permission
+                ItemBuilder builder;
+                if (hasPermission) {
+                    // Unlocked item appearance
+                    builder = new ItemBuilder(unlockedMaterial)
+                            .setDisplayName("§a" + displayName + " §7(Unlocked)")
+                            .addLoreLines(lore1, lore2);
+                } else {
+                    // Locked item appearance
+                    builder = new ItemBuilder(lockedMaterial)
+                            .setDisplayName("§c" + displayName + " §7(Locked)")
+                            .addLoreLines(lore1, lore2);
+                }
 
-        inv = Bukkit.createInventory(null, 9, "Player Count");
+                return builder;
+            }
 
-        initializeItems();
+            @Override
+            public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent inventoryClickEvent) {
+                Item item = (Item) inventoryClickEvent.getCurrentItem();
+
+
+            }
+
+
+            @EventHandler
+            public void onInventoryClick(final InventoryClickEvent event) {
+                Player player = (Player) event.getWhoClicked();
+                boolean hasPermission = player.hasPermission(permission);
+
+                if (hasPermission) {
+                    // Do something when player clicks and has permission
+                    player.sendMessage("§aYou selected " + displayName + "!");
+                } else {
+                    // Do something when player clicks but doesn't have permission
+                    player.sendMessage("§cYou don't have permission to use " + displayName + "!");
+                }
+            }
+        };
     }
 
+    // Creating permission-based rank items
+    Item rank1 = createPermissionItem(Material.DIAMOND, Material.BARRIER, "VIP", "ranks.vip", "", "");
+    Item rank2 = createPermissionItem(Material.GOLD_INGOT, Material.BARRIER, "MVP", "ranks.mvp", "", "");
+    Item rank3 = createPermissionItem(Material.EMERALD, Material.BARRIER, "ELITE", "ranks.elite", "", "");
+    Item rank4 = createPermissionItem(Material.NETHER_STAR, Material.BARRIER, "LEGEND", "ranks.legend", "", "");
+    Item rank5 = createPermissionItem(Material.DRAGON_EGG, Material.BARRIER, "GOD", "ranks.god", "", "");
 
-    public void initializeItems() {
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GREEN_WOOL, "Rank Available", "§aFirst line of the lore", "§bSecond line of the lore"));
+    // Additional ranks
+    Item rank6 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "SPECIAL1", "ranks.special1", "", "");
+    Item rank7 = createPermissionItem(Material.BEACON, Material.BARRIER, "SPECIAL2", "ranks.special2", "", "");
+    Item rank8 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "SPECIAL3", "ranks.special3", "", "");
+    Item rank9 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "SPECIAL4", "ranks.special4", "", "");
+    Item rank10 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "SPECIAL5", "ranks.special5", "", "");
 
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.RED_WOOL, "Rank Not Available", "§aFirst line of the lore", "§bSecond line of the lore"));
+    // Build the GUI
+    Gui gui = Gui.normal()
+            .setStructure(
+                    "# # # # # # # # #",
+                    "# # 1 2 3 4 5 # #",
+                    "# # 6 7 8 9 0 # #",
+                    "# # < > = - . # #",
+                    "# # # # # # # # #")
+            .addIngredient('#', border)
+            .addIngredient('1', rank1)
+            .addIngredient('2', rank2)
+            .addIngredient('3', rank3)
+            .addIngredient('4', rank4)
+            .addIngredient('5', rank5)
+            .addIngredient('6', rank6)
+            .addIngredient('7', rank7)
+            .addIngredient('8', rank8)
+            .addIngredient('9', rank9)
+            .addIngredient('0', rank10)
+            // Add other items like back, next buttons as needed
+            .build();
 
-        inv.addItem(createGuiItem(Material.GRAY_STAINED_GLASS_PANE, "Fill", "§aFirst line of the lore", "§bSecond line of the lore"));
-        inv.addItem(createGuiItem(Material.GOLD_BLOCK, "help", "§aFirst line of the lore", "§bSecond line of the lore"));
-    
-    }
-
-
-    protected ItemStack createGuiItem(final Material material, final String name, final String lore1, final String lore2) {
-        final ItemStack item = new ItemStack(material, 1);
-        final ItemMeta meta = item.getItemMeta();
-
-        meta.setDisplayName(name);
-        meta.setLore(Arrays.asList(lore1 + lore2));
-
-        item.setItemMeta(meta);
-
-        return item;
-    }
-
-    public void openInventory(final HumanEntity humanEntity) {
-        humanEntity.openInventory(inv);
-    }
-
-    @EventHandler
-    public void onInventoryClick(final InventoryClickEvent event) {
-        if(!event.getInventory().equals(inv)) return;
-
-        event.setCancelled(true);
-
-        final ItemStack clickedItem = event.getCurrentItem();
-        if(clickedItem == null || clickedItem.getType().isAir()) return;
-
-        final Player player = (Player) event.getWhoClicked();
-/*
-        switch(clickedItem.getType()) {
-            case IRON_INGOT:
-                player.sendMessage("You clicked Iron");
-                break;
-            case GOLD_INGOT:
-                player.sendMessage("You clicked Gold");
-                break;
-            case COPPER_INGOT:nvm install latest
-                player.sendMessage(("You clicked COpper"));
-                break;
-        }
-        */
-
-
-    }
-
-    public void onInventoryClick(final InventoryDragEvent event) {
-        if(event.getInventory().equals(inv)) {
-            event.setCancelled(true);
-        }
+    Gui.applyStructure;
+    public void openGui(Player player) {
+        window.open(player);
     }
 }
