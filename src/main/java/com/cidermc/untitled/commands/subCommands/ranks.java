@@ -21,7 +21,7 @@ public class ranks extends commandStruct {
 
     @Override
     public String getSyntax() {
-        return "";
+        return "/cider ranks";
     }
 
     @Override

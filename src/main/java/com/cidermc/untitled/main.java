@@ -15,7 +15,6 @@ public final class main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ranksGUI(), this);
 
         InvUI.getInstance().setPlugin(this);
-
     }
 
     @Override

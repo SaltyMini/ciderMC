@@ -1,6 +1,7 @@
 package com.cidermc.untitled.commands;
 
 import com.cidermc.untitled.commands.subCommands.inventoryCount;
+import com.cidermc.untitled.commands.subCommands.ranks;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,6 +16,7 @@ public class commandManager implements CommandExecutor {
 
     public commandManager() {
         commandStruct.add(new inventoryCount()); //adds inventoryCount command to command structure
+        commandStruct.add(new ranks());
     }
 
     @Override
