@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.jetbrains.annotations.NotNull;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.item.Item;
@@ -14,12 +14,10 @@ import xyz.xenondevs.invui.item.ItemProvider;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
 import xyz.xenondevs.invui.item.impl.AbstractItem;
 import xyz.xenondevs.invui.item.impl.SimpleItem;
-
-import static java.awt.SystemColor.window;
+import xyz.xenondevs.invui.window.Window;
 
 public class ranksGUI implements Listener {
     // Border item
-    Item border = new SimpleItem(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE));
 
     /**
      * Creates a permission-based item that shows different appearance based on permissions
@@ -27,6 +25,7 @@ public class ranksGUI implements Listener {
     public Item createPermissionItem(Material unlockedMaterial, Material lockedMaterial,
                                      String displayName, String permission, String lore1, String lore2) {
         return new AbstractItem() {
+
             @Override
             public ItemProvider getItemProvider(Player player) {
                 // Check if player has permission
@@ -72,6 +71,7 @@ public class ranksGUI implements Listener {
             }
         };
     }
+    final Item border = new SimpleItem(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE));
 
     // Creating permission-based rank items
     Item rank1 = createPermissionItem(Material.DIAMOND, Material.BARRIER, "VIP", "ranks.vip", "", "");
@@ -80,12 +80,17 @@ public class ranksGUI implements Listener {
     Item rank4 = createPermissionItem(Material.NETHER_STAR, Material.BARRIER, "LEGEND", "ranks.legend", "", "");
     Item rank5 = createPermissionItem(Material.DRAGON_EGG, Material.BARRIER, "GOD", "ranks.god", "", "");
 
-    // Additional ranks
     Item rank6 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "SPECIAL1", "ranks.special1", "", "");
     Item rank7 = createPermissionItem(Material.BEACON, Material.BARRIER, "SPECIAL2", "ranks.special2", "", "");
     Item rank8 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "SPECIAL3", "ranks.special3", "", "");
     Item rank9 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "SPECIAL4", "ranks.special4", "", "");
     Item rank10 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "SPECIAL5", "ranks.special5", "", "");
+
+    Item rank11 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "SPECIAL1", "ranks.special1", "", "");
+    Item rank12 = createPermissionItem(Material.BEACON, Material.BARRIER, "SPECIAL2", "ranks.special2", "", "");
+    Item rank13 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "SPECIAL3", "ranks.special3", "", "");
+    Item rank14 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "SPECIAL4", "ranks.special4", "", "");
+    Item rank15 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "SPECIAL5", "ranks.special5", "", "");
 
     // Build the GUI
     Gui gui = Gui.normal()
@@ -106,11 +111,31 @@ public class ranksGUI implements Listener {
             .addIngredient('8', rank8)
             .addIngredient('9', rank9)
             .addIngredient('0', rank10)
+            .addIngredient('<', rank11)
+            .addIngredient('>', rank12)
+            .addIngredient('=', rank13)
+            .addIngredient('-', rank14)
+            .addIngredient('.', rank15)
+
             // Add other items like back, next buttons as needed
             .build();
 
-    Gui.applyStructure;
+    public void onInventoryClick(final InventoryDragEvent event) {
+        if(event.getInventory().equals(gui)) {
+            event.setCancelled(true);
+            //handled block click
+        }
+    }
+
+
     public void openGui(Player player) {
-        window.open(player);
+        String title = "Ranks";
+        Window window = Window.single()
+                .setViewer(player)
+                .setTitle(title)
+                .setGui(gui)
+                .build();
+
+        //To open the GUI use ranksGUI.getInstance().openGui(player);
     }
 }

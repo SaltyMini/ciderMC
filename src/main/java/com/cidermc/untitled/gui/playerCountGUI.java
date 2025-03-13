@@ -77,6 +77,7 @@ public class playerCountGUI implements Listener {
 
     }
 
+    @EventHandler
     public void onInventoryClick(final InventoryDragEvent event) {
         if(event.getInventory().equals(inv)) {
             event.setCancelled(true);
