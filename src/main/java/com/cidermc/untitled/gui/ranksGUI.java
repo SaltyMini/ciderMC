@@ -140,14 +140,48 @@ public class ranksGUI implements Listener {
             new String[]{"100$"},
             "- Ability to set 2 Player Warps", "- Access to all balloon cosmetics");
 
-    Item rank11 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "Samurai", "cider.ranks.samurai", "- Has all permissions from previous rank", "- Access to all music cosmetics", "- 4 Jobs", "- /spin", "- /loom", "", "");
-    Item rank12 = createPermissionItem(Material.BEACON, Material.BARRIER, "Minister", "cider.ranks.minister", "- Has all permissions from previous rank", "- Access to all mount cosmetics", "- Access to 3 Dungeon Attempts", "Ability to set 3 Player Warps", "- 2 Rare Keys","- /loom",  "");
-    Item rank13 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "Shinpan", "cider.ranks.shinpan", "- Has all permissions from previous rank", "- Access to X", "- Access to all emote cosmetics", "- 8 Homes", "- /clearinventory", "", "");
-    Item rank14 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "Daimyo", "cider.ranks.daimyo", "- Has all permissions from previous rank", "- Access to all banner cosmetics", "- 5 Jobs", "- /trash", "", "", "");
-    Item rank15 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "Chancellor", "cider.ranks.chancellor", "- Has all permissions from previous rank", "- Ability to set 4 Player Warps", "- 9 Homes", "- /back", "", "", "");
+    Item rank11 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER,
+            "Samurai",
+            "cider.ranks.samurai",
+            new String[]{"100$"},
+            "- Has all permissions from previous rank",
+            "- Access to all music cosmetics", "- 4 Jobs", "- /spin", "- /loom", "", "");
+    Item rank12 = createPermissionItem(Material.BEACON, Material.BARRIER,
+            "Minister",
+            "cider.ranks.minister",
+            new String[]{"100$"},
+            "- Has all permissions from previous rank", "- Access to all mount cosmetics", "- Access to 3 Dungeon Attempts", "Ability to set 3 Player Warps", "- 2 Rare Keys","- /loom",  "");
+    Item rank13 = createPermissionItem(Material.ELYTRA, Material.BARRIER,
+            "Shinpan",
+            "cider.ranks.shinpan",
+            new String[]{"100$"},
+            "- Has all permissions from previous rank",
+            "- Access to X", "- Access to all emote cosmetics", "- 8 Homes", "- /clearinventory", "", "");
+    Item rank14 = createPermissionItem(Material.TRIDENT, Material.BARRIER,
+            "Daimyo",
+            "cider.ranks.daimyo",
+            new String[]{"100$"},
+            "- Has all permissions from previous rank",
+            "- Access to all banner cosmetics", "- 5 Jobs", "- /trash", "", "", "");
+    Item rank15 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER,
+            "Chancellor",
+            "cider.ranks.chancellor",
+            new String[]{"100$"},
+            "- Has all permissions from previous rank",
+            "- Ability to set 4 Player Warps", "- 9 Homes", "- /back", "", "", "");
 
-    Item rank16 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "Shogun", "cider.ranks.shogun","- Has all permissions from previous rank", "- 10 Homes", "- /feed (no cooldown)", "- /rtp (no cooldown)", "- /fix", "", "");
-    Item rank17 = createPermissionItem(Material.BEACON, Material.BARRIER, "Emperor", "cider.ranks.emperor", "- Has all permissions from previous rank", "- Ability to *prestige*", "- 2 Seasonal Keys", "-3 Rare Keys", "- +10,000 Claim Blocks", "", "");
+    Item rank16 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER,
+            "Shogun",
+            "cider.ranks.shogun",
+            new String[]{"100$"},
+            "- Has all permissions from previous rank",
+            "- 10 Homes", "- /feed (no cooldown)", "- /rtp (no cooldown)", "- /fix", "", "");
+    Item rank17 = createPermissionItem(Material.BEACON, Material.BARRIER,
+            "Emperor",
+            "cider.ranks.emperor",
+            new String[]{"100$"},
+            "- Has all permissions from previous rank",
+            "- Ability to *prestige*", "- 2 Seasonal Keys", "-3 Rare Keys", "- +10,000 Claim Blocks", "", "");
 
     final Item border = new SimpleItem(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE));
     // Build the GUI
