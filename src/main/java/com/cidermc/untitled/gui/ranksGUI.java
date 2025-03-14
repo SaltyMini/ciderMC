@@ -91,14 +91,17 @@ public class ranksGUI implements Listener {
     Item rank14 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "Daimyo", "cider.ranks.daimyo", "- Has all permissions from previous rank", "- Access to all banner cosmetics", "- 5 Jobs", "- /trash", "", "", "");
     Item rank15 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "Chancellor", "cider.ranks.chancellor", "- Has all permissions from previous rank", "- Ability to set 4 Player Warps", "- 9 Homes", "- /back", "", "", "");
 
+    Item rank16 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "Shogun", "cider.ranks.shogun","- Has all permissions from previous rank", "- 10 Homes", "- /feed (no cooldown)", "- /rtp (no cooldown)", "- /fix", "", "");
+    Item rank17 = createPermissionItem(Material.BEACON, Material.BARRIER, "Emperor", "cider.ranks.emperor", "- Has all permissions from previous rank", "- Ability to *prestige*", "- 2 Seasonal Keys", "-3 Rare Keys", "- +10,000 Claim Blocks", "", "");
+
     final Item border = new SimpleItem(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE));
     // Build the GUI
     Gui gui = Gui.normal()
             .setStructure(
                     "# # # # # # # # #",
-                    "# # 1 2 3 4 5 # #",
-                    "# # 6 7 8 9 0 # #",
-                    "# # < > = - . # #",
+                    "# 1 2 3 4 5 6 7 #",
+                    "# # 8 9 0 < > # #",
+                    "# # = - . ] [ # #",
                     "# # # # # # # # #")
             .addIngredient('#', border)
             .addIngredient('1', rank1)
@@ -116,7 +119,8 @@ public class ranksGUI implements Listener {
             .addIngredient('=', rank13)
             .addIngredient('-', rank14)
             .addIngredient('.', rank15)
-
+            .addIngredient(']', rank16)
+            .addIngredient('[', rank17)
             // Add other items like back, next buttons as needed
             .build();
 
