@@ -83,13 +83,13 @@ public class ranksGUI implements Listener {
     Item rank7 = createPermissionItem(Material.BEACON, Material.BARRIER, "Sculptor", "cider.ranks.sculptor", "- Has all permissions from previous rank", "- Ability to purchase 6 Lottery Tickets", "- Ability to sit on top of players", "- Access to 2 Dungeon Attempts", "- /craft", "- /feed (60 second cooldown)", "");
     Item rank8 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "Priest", "cider.ranks.priest", "- Has all permissions from previous rank", "- +5,000 Claim Blocks", "Ability to set 1 Player Warp", "- 5 Homes", "- 3 Jobs", "- /anvil", "");
     Item rank9 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "High Priest", "cider.ranks.highpriest", "- Has all permissions from previous rank", "- Ability to purchase 10 Lottery Tickets", "- Ability to list 1 item in /ah", "- 6 Homes", "- /marry", "", "");
-    Item rank10 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "Ronin", "cider.ranks.ronin", "- Has all permissions from previous rank", "- Ability to set 2 Player Warps", "- Access to all balloon cosmetics", "- ", "", "", "");
+    Item rank10 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "Ronin", "cider.ranks.ronin", "- Has all permissions from previous rank", "- Ability to set 2 Player Warps", "- Access to all balloon cosmetics", "- 7 Homes", "- /sell inventory", "", "");
 
-    Item rank11 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "Samurai", "cider.ranks.samurai", "- Has all permissions from previous rank", "", "", "", "", "", "");
-    Item rank12 = createPermissionItem(Material.BEACON, Material.BARRIER, "Minister", "cider.ranks.minister", "- Has all permissions from previous rank", "", "", "", "", "", "");
-    Item rank13 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "Shinpan", "cider.ranks.shinpan", "- Has all permissions from previous rank", "", "", "", "", "", "");
-    Item rank14 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "Daimyo", "cider.ranks.daimyo", "- Has all permissions from previous rank", "", "", "", "", "", "");
-    Item rank15 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "Chancellor", "cider.ranks.chancellor", "- Has all permissions from previous rank", "", "", "", "", "", "");
+    Item rank11 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER, "Samurai", "cider.ranks.samurai", "- Has all permissions from previous rank", "- Access to all music cosmetics", "- 4 Jobs", "- /spin", "- /loom", "", "");
+    Item rank12 = createPermissionItem(Material.BEACON, Material.BARRIER, "Minister", "cider.ranks.minister", "- Has all permissions from previous rank", "- Access to all mount cosmetics", "- Access to 3 Dungeon Attempts", "Ability to set 3 Player Warps", "- 2 Rare Keys","- /loom",  "");
+    Item rank13 = createPermissionItem(Material.ELYTRA, Material.BARRIER, "Shinpan", "cider.ranks.shinpan", "- Has all permissions from previous rank", "- Access to X", "- Access to all emote cosmetics", "- 8 Homes", "- /clearinventory", "", "");
+    Item rank14 = createPermissionItem(Material.TRIDENT, Material.BARRIER, "Daimyo", "cider.ranks.daimyo", "- Has all permissions from previous rank", "- Access to all banner cosmetics", "- 5 Jobs", "- /trash", "", "", "");
+    Item rank15 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER, "Chancellor", "cider.ranks.chancellor", "- Has all permissions from previous rank", "- Ability to set 4 Player Warps", "- 9 Homes", "- /back", "", "", "");
 
     final Item border = new SimpleItem(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE));
     // Build the GUI
