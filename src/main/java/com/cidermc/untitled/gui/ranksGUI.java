@@ -37,12 +37,12 @@ public class ranksGUI implements Listener {
                     // Unlocked item appearance
                     builder = new ItemBuilder(unlockedMaterial)
                             .setDisplayName("§a" + displayName + " §7(Unlocked)")
-                            .addLoreLines(lore1, lore2, lore3, lore4, lore5, lore6);
+                            .addLoreLines(lore1, lore2, lore3, lore4, lore5, lore6, lore7);
                 } else {
                     // Locked item appearance
                     builder = new ItemBuilder(lockedMaterial)
                             .setDisplayName("§c" + displayName + " §7(Locked)")
-                            .addLoreLines(lore1, lore2, lore3, lore4, lore5, lore6);
+                            .addLoreLines(lore1, lore2, lore3, lore4, lore5, lore6, lore7);
                 }
 
                 return builder;
