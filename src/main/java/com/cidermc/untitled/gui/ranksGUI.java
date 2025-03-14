@@ -37,6 +37,12 @@ public class ranksGUI implements Listener {
                     builder.addLoreLines("&7" + line);
                 }
 
+                for (String requirement : requirements) {
+                    builder.addLoreLines("&7 ");
+
+                    builder.addLoreLines("&c" + requirement);
+                }
+
                 return builder;
 
             }
@@ -88,6 +94,8 @@ public class ranksGUI implements Listener {
         };
     }
 
+
+    //Player requirements must be formatted, Money requirement, MCMMO requirements,....
     // Creating permission-based rank items
     Item rank1 = createPermissionItem(Material.DIAMOND, Material.BARRIER, "Guest",
             "cider.ranks.guest",
