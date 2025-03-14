@@ -55,6 +55,9 @@ public class ranksGUI implements Listener {
 
                 String[] requirementsArray = requirements;
 
+
+
+
                 //check if they meet the requirments
 
                 //change the name to say click to confirm again
