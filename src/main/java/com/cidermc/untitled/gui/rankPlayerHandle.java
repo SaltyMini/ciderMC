@@ -9,7 +9,7 @@ public class rankPlayerHandle implements Listener {
 
     public static void rankPlayerHandle(Player player, String rank, String[] requirments, String... lore) {}
 
-    
+
 
 
 }
