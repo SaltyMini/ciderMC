@@ -28,7 +28,7 @@ public class ranksGUI implements Listener {
 
             @Override
             public ItemProvider getItemProvider(Player player) {
-                boolean hasPermission = true; // Default to true initially
+                boolean hasPermission = player.hasPermission(permission);
 
                 ItemBuilder builder = new ItemBuilder(hasPermission ? unlockedMaterial : lockedMaterial)
                         .setDisplayName("&6" + displayName);
@@ -53,17 +53,13 @@ public class ranksGUI implements Listener {
                     return;
                 }
 
-                if(clickType == ClickType.LEFT) {
-                    getNeededRequirment(player, item);
-                }
+                String[] requirementsArray = requirements;
 
+                //check if they meet the requirments
 
-                public String[] getNeededRequirment(Player player, Item item) {
+                //change the name to say click to confirm again
 
-
-
-                }
-
+                //if they confim give and take whats needed
 
 
             }
