@@ -1,9 +1,11 @@
 C:\Users\samcl\Documents\GitHub\ciderMC\src\main\java\com\cidermc\untitled\commands\commandManager.java
 C:\Users\samcl\Documents\GitHub\ciderMC\src\main\java\com\cidermc\untitled\commands\commandStruct.java
+C:\Users\samcl\Documents\GitHub\ciderMC\src\main\java\com\cidermc\untitled\commands\subCommands\events.java
 C:\Users\samcl\Documents\GitHub\ciderMC\src\main\java\com\cidermc\untitled\commands\subCommands\inventoryCount.java
 C:\Users\samcl\Documents\GitHub\ciderMC\src\main\java\com\cidermc\untitled\commands\subCommands\playerCount.java
 C:\Users\samcl\Documents\GitHub\ciderMC\src\main\java\com\cidermc\untitled\commands\subCommands\ranks.java
 C:\Users\samcl\Documents\GitHub\ciderMC\src\main\java\com\cidermc\untitled\eventHandlers\onJoinLeave.java
 C:\Users\samcl\Documents\GitHub\ciderMC\src\main\java\com\cidermc\untitled\gui\playerCountGUI.java
+C:\Users\samcl\Documents\GitHub\ciderMC\src\main\java\com\cidermc\untitled\gui\rankPlayerHandle.java
 C:\Users\samcl\Documents\GitHub\ciderMC\src\main\java\com\cidermc\untitled\gui\ranksGUI.java
 C:\Users\samcl\Documents\GitHub\ciderMC\src\main\java\com\cidermc\untitled\main.java

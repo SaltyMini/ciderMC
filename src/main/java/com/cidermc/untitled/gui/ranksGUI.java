@@ -40,7 +40,21 @@ public class ranksGUI implements Listener {
                 for (String requirement : requirements) {
                     builder.addLoreLines("&7 ");
 
-                    builder.addLoreLines("&c" + requirement);
+                    //if they have the rank make it gold
+                    if(player.hasPermission(permission)) {
+                        builder.addLoreLines("&a" + requirement);
+                    } else {
+
+                    if(rankPlayerHandle.hasRequirementMoney(player, requirements[0])) {
+                        builder.addLoreLines("&a" + requirement);
+                    } else {
+                        builder.addLoreLines("&c" + requirement);
+                    }
+
+                    
+                    }
+
+
                 }
 
                 return builder;
@@ -96,6 +110,7 @@ public class ranksGUI implements Listener {
 
 
     //Player requirements must be formatted, Money requirement, MCMMO requirements,....
+    //                                                          MCMMO format: <power_level_required> text. e.g 100 Powerlevel required
     // Creating permission-based rank items
     Item rank1 = createPermissionItem(Material.DIAMOND, Material.BARRIER, "Guest",
             "cider.ranks.guest",
