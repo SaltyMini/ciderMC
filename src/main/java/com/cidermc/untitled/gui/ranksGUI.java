@@ -80,7 +80,7 @@ public class ranksGUI implements Listener {
                     return;
                 }
 
-                boolean tryRankUp = rankPlayerHandle.playerRankUpAttempt(player, displayName, requirements);
+                boolean tryRankUp = rankPlayerHandle.playerRankUpAttempt(player, displayName, requirements, bonuses);
 
                 if(!tryRankUp) {
                     Bukkit.getLogger().log(java.util.logging.Level.WARNING, "Error attemtping to rank up " + player.getName() + "! to " + displayName + "!" );
@@ -100,20 +100,6 @@ public class ranksGUI implements Listener {
                 return permission;
             }
 
-
-
-            @EventHandler
-            public void onInventoryClick(final InventoryClickEvent event) {
-                Player player = (Player) event.getWhoClicked();
-                boolean hasPermission = player.hasPermission(permission);
-
-                if (hasPermission) {
-                    // Do something when player clicks and has permission
-                } else {
-                    // Do something when player clicks but doesn't have permission
-                    player.sendMessage("§cYou don't have permission to use " + displayName + "!");
-                }
-            }
         };
     }
 
