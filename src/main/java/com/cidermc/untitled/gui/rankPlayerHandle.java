@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import net.milkbowl.vault.economy.Economy;
+import com.gmail.nossr50.api.ExperienceAPI;
 
 
 public class rankPlayerHandle implements Listener {
@@ -17,9 +18,7 @@ public class rankPlayerHandle implements Listener {
 
         double playerBal = economy.getBalance(player);
 
-        if(playerBal < Double.parseDouble(moneyRequirment)) return false;
-
-        return true;
+        return !(playerBal < Double.parseDouble(moneyRequirment));
     }
 
     public static boolean hasRequirementMCMMO(Player player, String requirement) {
@@ -27,12 +26,15 @@ public class rankPlayerHandle implements Listener {
         int requiredPowerLevel = Integer.parseInt(requirement.split(" ")[0]); //gets just the power level needed
 
 
-        //format of mcmmoRequirement, "100 MCMMO power level required"
+        int powerLevel = ExperienceAPI.getPowerLevel(player);
 
-        return true;
+        return powerLevel >= requiredPowerLevel;
     }
 
-    public static void rankPlayerHandle(Player player, String rank, String[] requirments, String... lore) {}
+
+    public static void rankPlayerHandle(Player player, String rank, String[] requirments, String... lore) {
+        
+    }
 
 
 

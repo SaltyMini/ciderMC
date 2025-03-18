@@ -51,7 +51,7 @@ public class ranksGUI implements Listener {
                         builder.addLoreLines("&c" + requirement);
                     }
 
-                    
+
                     }
 
 
