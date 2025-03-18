@@ -17,6 +17,8 @@ import xyz.xenondevs.invui.item.impl.AbstractItem;
 import xyz.xenondevs.invui.item.impl.SimpleItem;
 import xyz.xenondevs.invui.window.Window;
 
+import java.util.Objects;
+
 public class ranksGUI implements Listener {
     // Border item
 
@@ -70,8 +72,18 @@ public class ranksGUI implements Listener {
 
             @Override
             public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent inventoryClickEvent) {
-                Item item = (Item) inventoryClickEvent.getCurrentItem();
+                Material clickedMaterial = Objects.requireNonNull(inventoryClickEvent.getCurrentItem()).getType();
+                if(clickedMaterial.equals(Material.GOLD_BLOCK)) {
 
+                    //they have confirmed and clicked again, rank up
+                    boolean tryRankUp = rankPlayerHandle.playerRankUpAttempt(player, displayName, requirements, bonuses);
+
+                    if(!tryRankUp) {
+                        Bukkit.getLogger().log(java.util.logging.Level.WARNING, "Error attemtping to rank up " + player.getName() + "! to " + displayName + "!" );
+                    }
+
+                }
+                
                 boolean hasPermission = player.hasPermission(permission);
                 //if they have the permission they have the rank
 
@@ -80,19 +92,14 @@ public class ranksGUI implements Listener {
                     return;
                 }
 
-                boolean tryRankUp = rankPlayerHandle.playerRankUpAttempt(player, displayName, requirements, bonuses);
+                int slot = inventoryClickEvent.getRawSlot();
 
-                if(!tryRankUp) {
-                    Bukkit.getLogger().log(java.util.logging.Level.WARNING, "Error attemtping to rank up " + player.getName() + "! to " + displayName + "!" );
-                }
+                ItemBuilder confirmItemBuilder = new ItemBuilder(Material.GOLD_BLOCK)
+                        .setDisplayName("Click again to confirm");
 
+                Item updatedItem = new SimpleItem(confirmItemBuilder);
 
-                //check if they meet the requirments
-
-                //change the name to say click to confirm again
-
-                //if they confim give and take whats needed
-
+                gui.setItem(slot, updatedItem);
 
             }
 
