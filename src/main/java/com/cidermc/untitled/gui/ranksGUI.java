@@ -83,16 +83,23 @@ public class ranksGUI implements Listener {
                     }
 
                 }
-                
-                boolean hasPermission = player.hasPermission(permission);
-                //if they have the permission they have the rank
 
+                boolean hasPermission = player.hasPermission(permission); //if they have the permission they have the rank
                 if(hasPermission) {
                     player.sendMessage("You already have the rank " + displayName + "!");
                     return;
                 }
 
                 int slot = inventoryClickEvent.getRawSlot();
+
+                //check if they have the previous rank
+
+                Material previousRankMaterial = inventoryClickEvent.getInventory().getItem(slot - 1).getType();
+
+                if(previousRankMaterial.equals(Material.RED_WOOL)) {
+                    player.sendMessage("You cannot rank up to " + displayName + " without having the rank below it!");
+                    return;
+                }
 
                 ItemBuilder confirmItemBuilder = new ItemBuilder(Material.GOLD_BLOCK)
                         .setDisplayName("Click again to confirm");
@@ -116,98 +123,98 @@ public class ranksGUI implements Listener {
     //                                                                             mcMMOPowerLevel whatever  , rareKeyAmount rareKey
     //                                                                                                       , seasonalKeyAmount seasonalKey
 
-    Item rank1 = createPermissionItem(Material.DIAMOND, Material.BARRIER, "Guest",
+    Item rank1 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL, "Guest",
             "cider.ranks.guest",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- 1 Home", "- 1 Job", "- /kit Starter", "- /sell");
-    Item rank2 = createPermissionItem(Material.GOLD_INGOT, Material.BARRIER,
+    Item rank2 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Tanner",
             "cider.ranks.tanner",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- +7,500 Claim Blocks","- /pw", "- /poop");
-    Item rank3 = createPermissionItem(Material.EMERALD, Material.BARRIER,
+    Item rank3 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Criminal",
             "cider.ranks.criminal",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to purchase 2 Lottery Tickets", "- Access to 1 Dungeon Attempt", "- /fart", "- /sit");
-    Item rank4 = createPermissionItem(Material.NETHER_STAR, Material.BARRIER,
+    Item rank4 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Peasant",
             "cider.ranks.peasant",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to create shops", "- 3 Homes","- /tptoggle", "- /bottle", "- /crawl");
-    Item rank5 = createPermissionItem(Material.DRAGON_EGG, Material.BARRIER,
+    Item rank5 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Farmer", "cider.ranks.farmer",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- +2,500 Claim Blocks", "- Ability to purchase 3 Lottery Tickets", "- Ability to purchase plots at the market", "- 2 Jobs", "- /tpahere");
 
-    Item rank6 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER,
+    Item rank6 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Artist",
             "cider.ranks.artist",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to purchase 5 Lottery Tickets", "- 1 Seasonal Key", "- 4 Homes", "- /condense", "- /lay", "- /sell hand");
-    Item rank7 = createPermissionItem(Material.BEACON, Material.BARRIER,
+    Item rank7 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Sculptor",
             "cider.ranks.sculptor",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to purchase 6 Lottery Tickets", "- Ability to sit on top of players", "- Access to 2 Dungeon Attempts", "- /craft", "- /feed (60 second cooldown)");
-    Item rank8 = createPermissionItem(Material.ELYTRA, Material.BARRIER,
+    Item rank8 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Priest",
             "cider.ranks.priest",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- +5,000 Claim Blocks", "Ability to set 1 Player Warp", "- 5 Homes", "- 3 Jobs", "- /anvil");
-    Item rank9 = createPermissionItem(Material.TRIDENT, Material.BARRIER,
+    Item rank9 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "High Priest",
             "cider.ranks.highpriest",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to purchase 10 Lottery Tickets", "- Ability to list 1 item in /ah", "- 6 Homes", "- /marry");
-    Item rank10 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER,
+    Item rank10 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Ronin",
             "cider.ranks.ronin",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to set 2 Player Warps", "- Access to all balloon cosmetics");
 
-    Item rank11 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER,
+    Item rank11 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Samurai",
             "cider.ranks.samurai",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Access to all music cosmetics", "- 4 Jobs", "- /spin", "- /loom", "", "");
-    Item rank12 = createPermissionItem(Material.BEACON, Material.BARRIER,
+    Item rank12 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Minister",
             "cider.ranks.minister",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
   "- Access to all mount cosmetics", "- Access to 3 Dungeon Attempts", "Ability to set 3 Player Warps", "- 2 Rare Keys","- /loom",  "");
-    Item rank13 = createPermissionItem(Material.ELYTRA, Material.BARRIER,
+    Item rank13 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Shinpan",
             "cider.ranks.shinpan",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Access to X", "- Access to all emote cosmetics", "- 8 Homes", "- /clearinventory", "", "");
-    Item rank14 = createPermissionItem(Material.TRIDENT, Material.BARRIER,
+    Item rank14 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Daimyo",
             "cider.ranks.daimyo",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Access to all banner cosmetics", "- 5 Jobs", "- /trash", "", "", "");
-    Item rank15 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER,
+    Item rank15 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Chancellor",
             "cider.ranks.chancellor",
             new String[]{"100$"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to set 4 Player Warps", "- 9 Homes", "- /back", "", "", "");
 
-    Item rank16 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER,
+    Item rank16 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Shogun",
             "cider.ranks.shogun",
             new String[]{"100$"},
