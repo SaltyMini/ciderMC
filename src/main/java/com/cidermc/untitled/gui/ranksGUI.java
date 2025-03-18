@@ -103,17 +103,12 @@ public class ranksGUI implements Listener {
         };
     }
 
-
     //Basic format, Unlocked Material, Locked Materical, Display name, Permission, requirements(string array), bonuses(string array), lore...
     //                                                    cider.ranks.(rank name), MUST BE IN THIS FORMAT    , MUST BE IN THIS FORMAT, lore...
     //                                                                             moneyAmount$              , claimBlocksAmount claimBlocks
     //                                                                             mcMMOPowerLevel whatever  , rareKeyAmount rareKey
     //                                                                                                       , seasonalKeyAmount seasonalKey
-     //
 
-    //Player requirements must be formatted, Money requirement, MCMMO requirements,....
-    //                                                          MCMMO format: <power_level_required> text. e.g 100 Powerlevel required
-    // Creating permission-based rank items
     Item rank1 = createPermissionItem(Material.DIAMOND, Material.BARRIER, "Guest",
             "cider.ranks.guest",
             new String[]{"100$"},
@@ -249,7 +244,6 @@ public class ranksGUI implements Listener {
             .addIngredient('.', rank15)
             .addIngredient('_', rank16)
 
-            // Add other items like back, next buttons as needed
             .build();
 
     public void onInventoryClick(final InventoryDragEvent event) {
@@ -258,7 +252,6 @@ public class ranksGUI implements Listener {
             //handled block click
         }
     }
-
 
     public void openGui(Player player) {
         String title = "Ranks";
