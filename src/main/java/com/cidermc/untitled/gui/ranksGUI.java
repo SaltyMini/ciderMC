@@ -1,5 +1,6 @@
 package com.cidermc.untitled.gui;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,7 +24,8 @@ public class ranksGUI implements Listener {
      * Creates a permission-based item that shows different appearance based on permissions
      */
     public Item createPermissionItem(Material unlockedMaterial, Material lockedMaterial,
-                                     String displayName, String permission, String[] requirements, String... loreLines) {
+                                     String displayName, String permission, String[] requirements,
+                                     String[] bonuses, String... loreLines) {
         return new AbstractItem() {
 
             @Override
@@ -37,26 +39,31 @@ public class ranksGUI implements Listener {
                     builder.addLoreLines("&7" + line);
                 }
 
+                builder.addLoreLines("&7 "); //spacer
+
                 for (String requirement : requirements) {
-                    builder.addLoreLines("&7 ");
 
                     //if they have the rank make it gold
                     if(player.hasPermission(permission)) {
-                        builder.addLoreLines("&a" + requirement);
+                        builder.addLoreLines("&7" + requirement);
                     } else {
 
-                    if(rankPlayerHandle.hasRequirementMoney(player, requirements[0])) {
-                        builder.addLoreLines("&a" + requirement);
-                    } else {
-                        builder.addLoreLines("&c" + requirement);
+                        if(rankPlayerHandle.hasRequirementMoney(player, requirements[0])) {
+                            builder.addLoreLines("&a" + requirement);
+                        } else {
+                            builder.addLoreLines("&c" + requirement);
+                        }
+
+                        if(requirements[1] != null) { //if there is nothing there dont add the lore
+                            if(rankPlayerHandle.hasRequirementMCMMO(player, requirements[1])) {
+                                builder.addLoreLines("&a" + requirement);
+                            } else {
+                                builder.addLoreLines("&c" + requirement);
+                            }
+                        }
+
                     }
-
-
-                    }
-
-
                 }
-
                 return builder;
 
             }
@@ -73,9 +80,11 @@ public class ranksGUI implements Listener {
                     return;
                 }
 
-                String[] requirementsArray = requirements;
+                boolean tryRankUp = rankPlayerHandle.playerRankUpAttempt(player, displayName, requirements);
 
-
+                if(!tryRankUp) {
+                    Bukkit.getLogger().log(java.util.logging.Level.WARNING, "Error attemtping to rank up " + player.getName() + "! to " + displayName + "!" );
+                }
 
 
                 //check if they meet the requirments
@@ -109,99 +118,119 @@ public class ranksGUI implements Listener {
     }
 
 
+    //Basic format, Unlocked Material, Locked Materical, Display name, Permission, requirements(string array), bonuses(string array), lore...
+    //                                                    cider.ranks.(rank name), MUST BE IN THIS FORMAT    , MUST BE IN THIS FORMAT, lore...
+    //                                                                             moneyAmount$              , claimBlocksAmount claimBlocks
+    //                                                                             mcMMOPowerLevel whatever  , rareKeyAmount rareKey
+    //                                                                                                       , seasonalKeyAmount seasonalKey
+     //
+
     //Player requirements must be formatted, Money requirement, MCMMO requirements,....
     //                                                          MCMMO format: <power_level_required> text. e.g 100 Powerlevel required
     // Creating permission-based rank items
     Item rank1 = createPermissionItem(Material.DIAMOND, Material.BARRIER, "Guest",
             "cider.ranks.guest",
             new String[]{"100$"},
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- 1 Home", "- 1 Job", "- /kit Starter", "- /sell");
     Item rank2 = createPermissionItem(Material.GOLD_INGOT, Material.BARRIER,
             "Tanner",
             "cider.ranks.tanner",
             new String[]{"100$"},
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- +7,500 Claim Blocks","- /pw", "- /poop");
     Item rank3 = createPermissionItem(Material.EMERALD, Material.BARRIER,
             "Criminal",
             "cider.ranks.criminal",
             new String[]{"100$"},
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to purchase 2 Lottery Tickets", "- Access to 1 Dungeon Attempt", "- /fart", "- /sit");
     Item rank4 = createPermissionItem(Material.NETHER_STAR, Material.BARRIER,
             "Peasant",
             "cider.ranks.peasant",
             new String[]{"100$"},
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to create shops", "- 3 Homes","- /tptoggle", "- /bottle", "- /crawl");
     Item rank5 = createPermissionItem(Material.DRAGON_EGG, Material.BARRIER,
             "Farmer", "cider.ranks.farmer",
             new String[]{"100$"},
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- +2,500 Claim Blocks", "- Ability to purchase 3 Lottery Tickets", "- Ability to purchase plots at the market", "- 2 Jobs", "- /tpahere");
 
     Item rank6 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER,
             "Artist",
             "cider.ranks.artist",
             new String[]{"100$"},
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to purchase 5 Lottery Tickets", "- 1 Seasonal Key", "- 4 Homes", "- /condense", "- /lay", "- /sell hand");
     Item rank7 = createPermissionItem(Material.BEACON, Material.BARRIER,
             "Sculptor",
             "cider.ranks.sculptor",
             new String[]{"100$"},
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to purchase 6 Lottery Tickets", "- Ability to sit on top of players", "- Access to 2 Dungeon Attempts", "- /craft", "- /feed (60 second cooldown)");
     Item rank8 = createPermissionItem(Material.ELYTRA, Material.BARRIER,
             "Priest",
             "cider.ranks.priest",
             new String[]{"100$"},
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- +5,000 Claim Blocks", "Ability to set 1 Player Warp", "- 5 Homes", "- 3 Jobs", "- /anvil");
     Item rank9 = createPermissionItem(Material.TRIDENT, Material.BARRIER,
             "High Priest",
             "cider.ranks.highpriest",
             new String[]{"100$"},
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to purchase 10 Lottery Tickets", "- Ability to list 1 item in /ah", "- 6 Homes", "- /marry");
     Item rank10 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER,
             "Ronin",
             "cider.ranks.ronin",
             new String[]{"100$"},
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to set 2 Player Warps", "- Access to all balloon cosmetics");
 
     Item rank11 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER,
             "Samurai",
             "cider.ranks.samurai",
             new String[]{"100$"},
-            "- Has all permissions from previous rank",
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Access to all music cosmetics", "- 4 Jobs", "- /spin", "- /loom", "", "");
     Item rank12 = createPermissionItem(Material.BEACON, Material.BARRIER,
             "Minister",
             "cider.ranks.minister",
             new String[]{"100$"},
-            "- Has all permissions from previous rank", "- Access to all mount cosmetics", "- Access to 3 Dungeon Attempts", "Ability to set 3 Player Warps", "- 2 Rare Keys","- /loom",  "");
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
+  "- Access to all mount cosmetics", "- Access to 3 Dungeon Attempts", "Ability to set 3 Player Warps", "- 2 Rare Keys","- /loom",  "");
     Item rank13 = createPermissionItem(Material.ELYTRA, Material.BARRIER,
             "Shinpan",
             "cider.ranks.shinpan",
             new String[]{"100$"},
-            "- Has all permissions from previous rank",
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Access to X", "- Access to all emote cosmetics", "- 8 Homes", "- /clearinventory", "", "");
     Item rank14 = createPermissionItem(Material.TRIDENT, Material.BARRIER,
             "Daimyo",
             "cider.ranks.daimyo",
             new String[]{"100$"},
-            "- Has all permissions from previous rank",
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Access to all banner cosmetics", "- 5 Jobs", "- /trash", "", "", "");
     Item rank15 = createPermissionItem(Material.TOTEM_OF_UNDYING, Material.BARRIER,
             "Chancellor",
             "cider.ranks.chancellor",
             new String[]{"100$"},
-            "- Has all permissions from previous rank",
+            new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to set 4 Player Warps", "- 9 Homes", "- /back", "", "", "");
 
     Item rank16 = createPermissionItem(Material.ENDER_EYE, Material.BARRIER,
             "Shogun",
             "cider.ranks.shogun",
             new String[]{"100$"},
+            new String[]{"2500 claim blocks"},
             "- Has all permissions from previous rank",
             "- 10 Homes", "- /feed (no cooldown)", "- /rtp (no cooldown)", "- /fix", "", "");
     Item rank17 = createPermissionItem(Material.BEACON, Material.BARRIER,
             "Emperor",
             "cider.ranks.emperor",
             new String[]{"100$"},
+            new String[]{"2500 claim blocks"},
             "- Has all permissions from previous rank",
             "- Ability to *prestige*", "- 2 Seasonal Keys", "-3 Rare Keys", "- +10,000 Claim Blocks", "", "");
 
