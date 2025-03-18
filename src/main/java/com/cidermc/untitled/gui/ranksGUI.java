@@ -207,13 +207,6 @@ public class ranksGUI implements Listener {
             new String[]{"2500 claim blocks"},
             "- Has all permissions from previous rank",
             "- 10 Homes", "- /feed (no cooldown)", "- /rtp (no cooldown)", "- /fix", "", "");
-    Item rank17 = createPermissionItem(Material.BEACON, Material.BARRIER,
-            "Emperor",
-            "cider.ranks.emperor",
-            new String[]{"100$"},
-            new String[]{"2500 claim blocks"},
-            "- Has all permissions from previous rank",
-            "- Ability to *prestige*", "- 2 Seasonal Keys", "-3 Rare Keys", "- +10,000 Claim Blocks", "", "");
 
     final Item border = new SimpleItem(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE));
     // Build the GUI
