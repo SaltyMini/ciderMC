@@ -1,9 +1,7 @@
 package com.cidermc.untitled.gui;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -18,6 +16,7 @@ import xyz.xenondevs.invui.item.impl.SimpleItem;
 import xyz.xenondevs.invui.window.Window;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public class ranksGUI implements Listener {
     // Border item
@@ -74,15 +73,18 @@ public class ranksGUI implements Listener {
             public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent inventoryClickEvent) {
                 Material clickedMaterial = Objects.requireNonNull(inventoryClickEvent.getCurrentItem()).getType();
                 if(clickedMaterial.equals(Material.GOLD_BLOCK)) {
+                    Logger log = Logger.getLogger("Minecraft");
 
                     //they have confirmed and clicked again, rank up
                     boolean tryRankUp = rankPlayerHandle.playerRankUpAttempt(player, displayName, requirements, bonuses);
 
                     if(!tryRankUp) {
-                        Bukkit.getLogger().log(java.util.logging.Level.WARNING, "Error attemtping to rank up " + player.getName() + "! to " + displayName + "!" );
+                        log.warning("Error attemtping to rank up " + player.getName() + "! to " + displayName + "!" );
                     }
 
                 }
+
+
 
                 boolean hasPermission = player.hasPermission(permission); //if they have the permission they have the rank
                 if(hasPermission) {
@@ -94,7 +96,7 @@ public class ranksGUI implements Listener {
 
                 //check if they have the previous rank
 
-                Material previousRankMaterial = inventoryClickEvent.getInventory().getItem(slot - 1).getType();
+                Material previousRankMaterial = Objects.requireNonNull(inventoryClickEvent.getInventory().getItem(slot - 1)).getType();
 
                 if(previousRankMaterial.equals(Material.RED_WOOL)) {
                     player.sendMessage("You cannot rank up to " + displayName + " without having the rank below it!");
@@ -108,10 +110,6 @@ public class ranksGUI implements Listener {
 
                 gui.setItem(slot, updatedItem);
 
-            }
-
-            public String getPermission() {
-                return permission;
             }
 
         };
@@ -253,13 +251,6 @@ public class ranksGUI implements Listener {
 
             .build();
 
-    public void onInventoryClick(final InventoryDragEvent event) {
-        if(event.getInventory().equals(gui)) {
-            event.setCancelled(true);
-            //handled block click
-        }
-    }
-
     public void openGui(Player player) {
         String title = "Ranks";
         Window window = Window.single()
@@ -267,7 +258,6 @@ public class ranksGUI implements Listener {
                 .setTitle(title)
                 .setGui(gui)
                 .build();
-
         //To open the GUI use ranksGUI.getInstance().openGui(player);
     }
 }
