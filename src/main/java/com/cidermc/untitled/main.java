@@ -6,11 +6,13 @@ import com.cidermc.untitled.gui.ranksGUI;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.xenondevs.invui.InvUI;
 
+import java.util.Objects;
+
 public final class main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getCommand("cider").setExecutor(new commandManager());
+        Objects.requireNonNull(getCommand("cider")).setExecutor(new commandManager());
         getServer().getPluginManager().registerEvents(new playerCountGUI(), this);
         getServer().getPluginManager().registerEvents(new ranksGUI(), this);
     // runs on start
