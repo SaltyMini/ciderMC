@@ -1,10 +1,11 @@
 package com.cidermc.untitled.gui;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import net.milkbowl.vault.economy.Economy;
 import com.gmail.nossr50.api.ExperienceAPI;
+
+import java.util.Objects;
 
 import static org.bukkit.Bukkit.getServer;
 
@@ -16,7 +17,7 @@ public class rankPlayerHandle implements Listener {
         String moneyRequirment = requirement;
         moneyRequirment = moneyRequirment.substring(1); //Remove $ sign
 
-        Economy economy = getServer().getServicesManager().getRegistration(Economy.class).getProvider();
+        Economy economy = Objects.requireNonNull(getServer().getServicesManager().getRegistration(Economy.class)).getProvider();
 
         double playerBal = economy.getBalance(player);
 
@@ -45,13 +46,33 @@ public class rankPlayerHandle implements Listener {
             }
         }
 
+        //remove money
+        
+
         //rank the player up
 
         getServer().dispatchCommand(getServer().getConsoleSender(), "lp user " + player.getName() + " promote ranks");
         getServer().dispatchCommand(getServer().getConsoleSender(), "tags set " + player.getName() + " " + rank);
 
-        //handle bonuses
+        String blocksBonus = bonuses[0];
+        String rareKeysBonus = bonuses[1];
+        String seasonalKeysBonus = bonuses[2];
 
+        blocksBonus = blocksBonus.split(" ")[0];
+        rareKeysBonus = rareKeysBonus.split(" ")[0];
+        seasonalKeysBonus = seasonalKeysBonus.split(" ")[0];
+
+        if(Integer.parseInt(blocksBonus) != 0) {
+            //TODO give players blocks
+        }
+
+        if(Integer.parseInt(rareKeysBonus) != 0) {
+            //TODO give players key
+        }
+
+        if(Integer.parseInt(seasonalKeysBonus) != 0) {
+            //TODO give players key
+        }
 
         return false;
     }
