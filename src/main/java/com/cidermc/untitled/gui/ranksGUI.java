@@ -117,13 +117,13 @@ public class ranksGUI implements Listener {
 
     //Basic format, Unlocked Material, Locked Materical, Display name, Permission, requirements(string array), bonuses(string array), lore...
     //                                                    cider.ranks.(rank name), MUST BE IN THIS FORMAT    , MUST BE IN THIS FORMAT, lore...
-    //                                                                             moneyAmount$              , claimBlocksAmount claimBlocks
+    //                                                                             $moneyAmount              , claimBlocksAmount claimBlocks
     //                                                                             mcMMOPowerLevel whatever  , rareKeyAmount rareKey
     //                                                                                                       , seasonalKeyAmount seasonalKey
 
     Item rank1 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL, "Guest",
             "cider.ranks.guest",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- 1 Home", "- 1 Job", "- /kit Starter", "- /sell");
     Item rank2 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,

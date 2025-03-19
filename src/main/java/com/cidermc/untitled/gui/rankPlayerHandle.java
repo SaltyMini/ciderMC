@@ -47,7 +47,12 @@ public class rankPlayerHandle implements Listener {
         }
 
         //remove money
-        
+        String moneyRequirment = requirements[0];
+        moneyRequirment = moneyRequirment.substring(1); //Remove $ sign
+
+
+        Economy economy = Objects.requireNonNull(getServer().getServicesManager().getRegistration(Economy.class)).getProvider();
+        economy.withdrawPlayer(player, Double.parseDouble(moneyRequirment));
 
         //rank the player up
 
