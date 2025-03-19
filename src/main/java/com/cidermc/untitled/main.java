@@ -1,7 +1,6 @@
 package com.cidermc.untitled;
 
 import com.cidermc.untitled.commands.commandManager;
-import com.cidermc.untitled.gui.playerCountGUI;
 import com.cidermc.untitled.gui.ranksGUI;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.xenondevs.invui.InvUI;
