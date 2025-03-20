@@ -1,4 +1,4 @@
-package com.cidermc.untitled.commands.subCommands;
+package com.cidermc.untitled.commands;
 
 
 import org.bukkit.Material;
