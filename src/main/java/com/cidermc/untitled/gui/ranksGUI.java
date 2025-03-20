@@ -19,7 +19,6 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 public class ranksGUI implements Listener {
-    // Border item
 
     /**
      * Creates a permission-based item that shows different appearance based on permissions
