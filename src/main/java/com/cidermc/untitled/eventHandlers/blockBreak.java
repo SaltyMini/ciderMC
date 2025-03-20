@@ -1,4 +1,7 @@
 package com.cidermc.untitled.eventHandlers;
 
-public class blockBreak {
+import org.bukkit.event.Listener;
+
+public class blockBreak implements Listener {
+    
 }

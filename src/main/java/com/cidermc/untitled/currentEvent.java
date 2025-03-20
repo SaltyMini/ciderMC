@@ -11,8 +11,9 @@ public class currentEvent {
     //format for storing data
     //playerName--score-- player names on evens scores on odd
 
-    public String currentEventName;
-    public String currentEventType; //mobKill
+    public String currentEventName = null;
+    public String currentEventType = null; //mobKill
+    public boolean eventActive = false;
 
 
 
