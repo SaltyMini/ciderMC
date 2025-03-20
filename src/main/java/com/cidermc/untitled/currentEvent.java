@@ -12,6 +12,17 @@ public class currentEvent {
     //playerName--score-- player names on evens scores on odd
 
     public String currentEventName;
+    public String currentEventType; //mobKill
+
+
+
+    public String getCurrentEventType() {
+        return currentEventType;
+    }
+
+    public void getCurrentEventName(String type) {
+        this.currentEventName = type;
+    }
 
     //TODO save datya to yml file
 
