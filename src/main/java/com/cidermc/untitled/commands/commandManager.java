@@ -21,6 +21,7 @@ public class commandManager implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if(!command.getLabel().equalsIgnoreCase("cider")) { return true; }
         // Check if args is empty
         if (args.length == 0) {
             commandSender.sendMessage("Use /cider help to see available commands");
@@ -30,7 +31,7 @@ public class commandManager implements CommandExecutor {
         // Handle help command
         if (args[0].equalsIgnoreCase("help")) {
             // If there's a second argument, show help for that specific command
-            if (args.length > 1 && !args[1].isEmpty()) {
+            if (args.length > 1) {
                 for (commandStruct cmd : getCommandStruct()) {
                     if (cmd.getName().equalsIgnoreCase(args[1])) {
                         commandSender.sendMessage(cmd.getSyntax() + " - " + cmd.getDescription());

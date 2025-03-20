@@ -19,7 +19,8 @@ public final class main extends JavaPlugin {
     // runs on start
         InvUI.getInstance().setPlugin(this);
 
-        currentEvent event = new currentEvent();
+        currentEvent.getInstance();
+
         getServer().getPluginManager().registerEvents(new mobKill(), this);
         getServer().getPluginManager().registerEvents(new blockBreak(), this);
         getServer().getPluginManager().registerEvents(new onJoinLeave(), this);
