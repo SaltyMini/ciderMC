@@ -29,18 +29,24 @@ public class currentEvent {
     private boolean eventActive = false;
     private final Entity currentEntity = null;
 
+    public void setEventActive(boolean args) {
+        this.eventActive = args;
+    }
 
+    public boolean getEventState() {
+        return this.eventActive;
+    }
 
     public Entity getCurrentEntity() {
-        return currentEntity;
+        return this.currentEntity;
     }
 
     public String getCurrentEventType() {
-        return currentEventType;
+        return this.currentEventType;
     }
 
     public String getCurrentEventName(String type) {
-        return currentEventName;
+        return this.currentEventName;
     }
 
     //TODO save datya to yml file
