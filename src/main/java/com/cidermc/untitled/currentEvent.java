@@ -1,33 +1,82 @@
 package com.cidermc.untitled;
 
-import org.bukkit.entity.Entity;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class currentEvent {
 
     private static currentEvent instance;
+    private final Plugin plugin;
+    //TODO initialise this in onEnable
+    //TODO pull data from yml file
+    public Map<String, Integer> playerScores = new HashMap<>();
+    private String currentEventName = null;
+    private String currentEventType = null; //mobKill
 
-    public static currentEvent getInstance() {
+    private String target = null;
+    private boolean eventActive = false;
+
+    private currentEvent(Plugin plugin) {
+        this.plugin = plugin;
+        loadFromConfig();
+    }
+
+    public void loadFromConfig() {
+        File configFile = new File(plugin.getDataFolder(), "events.yml");
+        FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
+
+        this.currentEventName = config.getString("event.eventName", "No Event");
+        this.currentEventType = config.getString("event.eventType", "none");
+        this.target = config.getString("event.target", "none");
+        this.eventActive = config.getBoolean("event.active", false);
+    }
+
+    /**
+    public void saveToConfig() {
+        File configFile = new File(plugin.getDataFolder(), "playerScores.yml");
+        FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
+
+        config.set("event.eventName", currentEventName);
+        config.set("event.eventType", currentEventType);
+        config.set("event.target", target);
+        config.set("event.active", eventActive);
+
+        try {
+            config.save(configFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+     **/
+
+
+    public static currentEvent getInstance(Plugin plugin) {
         if (instance == null) {
             synchronized (currentEvent.class) {
-                instance = new currentEvent();
+                instance = new currentEvent(plugin);
             }
         }
         return instance;
     }
 
-    //TODO initialise this in onEnable
-    //TODO pull data from yml file
+    public String getMobTarget() {
+        return target;
+    }
 
-    public ArrayList<String> playerScores = new ArrayList<String>();
-    //format for storing data
-    //playerName--score-- player names on evens scores on odd
+    public int getScore(Player player) {
+        return playerScores.getOrDefault(player.getName(), 0);
+    }
 
-    private final String currentEventName = null;
-    private final String currentEventType = null; //mobKill
-    private boolean eventActive = false;
-    private final Entity currentEntity = null;
+    public void updateScore(Player player, int score) {
+        String playerName = player.getName();
+        playerScores.merge(playerName, score, Integer::sum);
+    }
 
     public void setEventActive(boolean args) {
         this.eventActive = args;
@@ -37,15 +86,11 @@ public class currentEvent {
         return this.eventActive;
     }
 
-    public Entity getCurrentEntity() {
-        return this.currentEntity;
-    }
-
     public String getCurrentEventType() {
         return this.currentEventType;
     }
 
-    public String getCurrentEventName(String type) {
+    public String getCurrentEventName() {
         return this.currentEventName;
     }
 
