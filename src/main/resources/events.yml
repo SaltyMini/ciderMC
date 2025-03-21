@@ -1,0 +1,10 @@
+event: event1
+eventActive: false
+
+event1:
+  eventName: "Kill Zombies"
+  eventType: "mobKill"
+  target: "Zombie"
+
+
+
