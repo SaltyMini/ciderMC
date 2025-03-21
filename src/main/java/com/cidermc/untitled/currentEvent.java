@@ -13,8 +13,7 @@ public class currentEvent {
 
     private static currentEvent instance;
     private final Plugin plugin;
-    //TODO initialise this in onEnable
-    //TODO pull data from yml file
+
     public Map<String, Integer> playerScores = new HashMap<>();
     private String currentEventName = null;
     private String currentEventType = null; //mobKill
@@ -27,33 +26,33 @@ public class currentEvent {
         loadFromConfig();
     }
 
-    public void loadFromConfig() {
-        File configFile = new File(plugin.getDataFolder(), "events.yml");
-        FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
 
-        this.currentEventName = config.getString("event.eventName", "No Event");
-        this.currentEventType = config.getString("event.eventType", "none");
-        this.target = config.getString("event.target", "none");
-        this.eventActive = config.getBoolean("event.active", false);
+
+    public void loadFromConfig() {
+        File eventsFile = new File(plugin.getDataFolder(), "events.yml");
+        FileConfiguration eFile = YamlConfiguration.loadConfiguration(eventsFile);
+
+        String currentEvent = eFile.getString("event", "event1");
+        this.eventActive = eFile.getBoolean("eventActive", false);
+
+        this.currentEventName = eFile.getString(currentEvent + ".eventName", "none");
+        this.currentEventType = eFile.getString(currentEvent+ ".eventType", "none");
+        this.target = eFile.getString(currentEvent + ".target", "none");
     }
 
-    /**
-    public void saveToConfig() {
-        File configFile = new File(plugin.getDataFolder(), "playerScores.yml");
-        FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
+    public void saveScore() {
+        File playerScoresFile = new File(plugin.getDataFolder(), "playerScores.yml");
+        FileConfiguration pFile = YamlConfiguration.loadConfiguration(playerScoresFile);
 
-        config.set("event.eventName", currentEventName);
-        config.set("event.eventType", currentEventType);
-        config.set("event.target", target);
-        config.set("event.active", eventActive);
+        pFile.set("Scores", playerScores);
 
         try {
-            config.save(configFile);
+            pFile.save(playerScoresFile);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-     **/
+
 
 
     public static currentEvent getInstance(Plugin plugin) {
@@ -93,9 +92,5 @@ public class currentEvent {
     public String getCurrentEventName() {
         return this.currentEventName;
     }
-
-    //TODO save datya to yml file
-
-
 
 }
