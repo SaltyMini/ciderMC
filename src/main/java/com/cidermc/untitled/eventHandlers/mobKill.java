@@ -13,15 +13,21 @@ public class mobKill implements Listener {
 
     @EventHandler
     public void onMobKill(EntityDeathEvent event) {
+        if (event.getEntity().getKiller() == null) {
+         return;
+        }
 
         currentEvent eventInstance = currentEvent.getInstance();
 
         if(!eventInstance.getEventState()) { return; } //return if event is not active
-
         if(!eventInstance.getCurrentEventType().equals("mobKill")) { return; } //checks if its a mobkill event
+        if(eventInstance)
 
-        ArrayList<String> scores = eventInstance.playerScores; //gets current scores
         Player player = event.getEntity().getKiller();
+
+
+
+        eventInstance.updateScore(player, 1);
 
 
 
