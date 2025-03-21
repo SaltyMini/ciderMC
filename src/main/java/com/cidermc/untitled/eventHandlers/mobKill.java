@@ -16,7 +16,7 @@ public class mobKill implements Listener {
 
         currentEvent eventInstance = currentEvent.getInstance();
 
-        if(!eventInstance.eventActive) { return; } //return if event is not active
+        if(!eventInstance.getEventState()) { return; } //return if event is not active
 
         if(!eventInstance.getCurrentEventType().equals("mobKill")) { return; } //checks if its a mobkill event
 
