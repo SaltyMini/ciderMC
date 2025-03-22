@@ -1,6 +1,8 @@
 package com.cidermc.untitled.eventHandlers;
 
 import com.cidermc.untitled.currentEvent;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,8 +31,13 @@ public class MobKill implements Listener {
 
         Player player = event.getEntity().getKiller();
 
+        String targetName = eventInstance.getMobTarget();
+        EntityType entityType = EntityType.valueOf(targetName.toUpperCase());
 
 
+        if(event.getEntity().getType().equals(entityType)) {
+            eventInstance.updateScore(player, 1);
+        }
     }
 
 }
