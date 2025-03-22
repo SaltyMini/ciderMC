@@ -8,6 +8,7 @@ import org.bukkit.plugin.Plugin;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class currentEvent {
 
@@ -15,10 +16,10 @@ public class currentEvent {
     private final Plugin plugin;
 
     public Map<String, Integer> playerScores = new HashMap<>();
-    private String currentEventName = null;
-    private String currentEventType = null; //mobKill
+    private String currentEventName = "none";
+    private String currentEventType = "none"; //mobKill
 
-    private String target = null;
+    private String target = "none";
     private boolean eventActive = false;
 
     private currentEvent(Plugin plugin) {
@@ -26,7 +27,15 @@ public class currentEvent {
         loadFromConfig();
     }
 
+    public void loadScores() {
+        File playerScoresFile = new File(plugin.getDataFolder(), "playerScores.yml");
+        FileConfiguration pFile = YamlConfiguration.loadConfiguration(playerScoresFile);
 
+            if (pFile.contains("Scores")) {
+                for (String key : Objects.requireNonNull(pFile.getConfigurationSection("Scores")).getKeys(false)) {
+                    playerScores.put(key, pFile.getInt("Scores." + key)); }
+            }
+    }
 
     public void loadFromConfig() {
         File eventsFile = new File(plugin.getDataFolder(), "events.yml");
@@ -44,7 +53,9 @@ public class currentEvent {
         File playerScoresFile = new File(plugin.getDataFolder(), "playerScores.yml");
         FileConfiguration pFile = YamlConfiguration.loadConfiguration(playerScoresFile);
 
-        pFile.set("Scores", playerScores);
+        for (Map.Entry<String, Integer> entry : playerScores.entrySet()) {
+            pFile.set("Scores." + entry.getKey(), entry.getValue());
+        }
 
         try {
             pFile.save(playerScoresFile);
@@ -52,8 +63,6 @@ public class currentEvent {
             e.printStackTrace();
         }
     }
-
-
 
     public static currentEvent getInstance(Plugin plugin) {
         if (instance == null) {
