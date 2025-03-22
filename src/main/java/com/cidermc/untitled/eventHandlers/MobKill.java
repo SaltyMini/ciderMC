@@ -19,6 +19,9 @@ public class MobKill implements Listener {
 
     @EventHandler
     public void onMobKill(EntityDeathEvent event) {
+
+
+        //player event stuff
         if (event.getEntity().getKiller() == null) {
          return;
         }
