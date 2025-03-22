@@ -41,7 +41,7 @@ public class currentEvent {
 
 
 
-    public void loadScores() {
+    private void loadScores() {
         File playerScoresFile = new File(plugin.getDataFolder(), "playerScores.yml");
         FileConfiguration pFile = YamlConfiguration.loadConfiguration(playerScoresFile);
 
@@ -51,7 +51,7 @@ public class currentEvent {
             }
     }
 
-    public void loadFromConfig() {
+    private void loadFromConfig() {
         File eventsFile = new File(plugin.getDataFolder(), "events.yml");
         FileConfiguration eFile = YamlConfiguration.loadConfiguration(eventsFile);
 
@@ -63,7 +63,7 @@ public class currentEvent {
         this.target = eFile.getString(currentEvent + ".target", "none");
     }
 
-    public synchronized void saveScore() {
+    private synchronized void saveScore() {
         File playerScoresFile = new File(plugin.getDataFolder(), "playerScores.yml");
         FileConfiguration pFile = YamlConfiguration.loadConfiguration(playerScoresFile);
 
