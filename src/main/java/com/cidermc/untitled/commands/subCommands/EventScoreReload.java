@@ -26,14 +26,6 @@ public class EventScoreReload extends CommandStruct {
         return "/cider eventshelp";
     }
 
-
-    private final Plugin plugin;
-
-    public EventScoreReload(Plugin plugin) {
-        this.plugin = plugin;
-    }
-
-
     @Override
     public void commandRun(CommandSender commandSender, String[] args) {
 
