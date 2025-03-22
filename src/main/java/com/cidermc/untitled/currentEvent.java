@@ -15,7 +15,7 @@ public class currentEvent {
     private static currentEvent instance;
     private final Plugin plugin;
 
-    public Map<String, Integer> playerScores = new HashMap<>();
+    private Map<String, Integer> playerScores = new HashMap<>();
     private String currentEventName = "none";
     private String currentEventType = "none"; //mobKill
 
@@ -27,8 +27,19 @@ public class currentEvent {
         loadFromConfig();
     }
 
+    public static currentEvent getInstance(Plugin plugin) {
+        if (instance == null) {
+            synchronized (currentEvent.class) {
+                instance = new currentEvent(plugin);
+            }
+        }
+        return instance;
+    }
 
     //TODO file curation if not there and effor checking
+
+
+
 
     public void loadScores() {
         File playerScoresFile = new File(plugin.getDataFolder(), "playerScores.yml");
@@ -52,7 +63,7 @@ public class currentEvent {
         this.target = eFile.getString(currentEvent + ".target", "none");
     }
 
-    public void saveScore() {
+    public synchronized void saveScore() {
         File playerScoresFile = new File(plugin.getDataFolder(), "playerScores.yml");
         FileConfiguration pFile = YamlConfiguration.loadConfiguration(playerScoresFile);
 
@@ -67,18 +78,9 @@ public class currentEvent {
         }
     }
 
-    public static currentEvent getInstance(Plugin plugin) {
-        if (instance == null) {
-            synchronized (currentEvent.class) {
-                instance = new currentEvent(plugin);
-            }
-        }
-        return instance;
-    }
 
-    public String getMobTarget() {
-        return target;
-    }
+
+
 
     public int getScore(Player player) {
         return playerScores.getOrDefault(player.getName(), 0);
@@ -87,6 +89,11 @@ public class currentEvent {
     public void updateScore(Player player, int score) {
         String playerName = player.getName();
         playerScores.merge(playerName, score, Integer::sum);
+    }
+
+
+    public String getMobTarget() {
+        return target;
     }
 
     public void setEventState(boolean args) {
