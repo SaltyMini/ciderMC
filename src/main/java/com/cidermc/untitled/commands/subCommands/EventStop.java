@@ -5,7 +5,7 @@ import com.cidermc.untitled.currentEvent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 
-public class EventStart extends CommandStruct {
+public class EventStop extends CommandStruct {
 
     @Override
     public String getName() {
@@ -30,7 +30,7 @@ public class EventStart extends CommandStruct {
 
     private final Plugin plugin;
 
-    public EventStart(Plugin plugin) {
+    public EventStop(Plugin plugin) {
         this.plugin = plugin;
     }
 
@@ -43,7 +43,7 @@ public class EventStart extends CommandStruct {
 
         currentEvent eventInstance = currentEvent.getInstance(plugin);
 
-        eventInstance.setEventState(true);
+        eventInstance.setEventState(false);
 
     }
 }
