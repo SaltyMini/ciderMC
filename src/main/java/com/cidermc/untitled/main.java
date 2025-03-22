@@ -5,6 +5,7 @@ import com.cidermc.untitled.eventHandlers.blockBreak;
 import com.cidermc.untitled.eventHandlers.mobKill;
 import com.cidermc.untitled.eventHandlers.onJoinLeave;
 import com.cidermc.untitled.gui.ranksGUI;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.xenondevs.invui.InvUI;
 
@@ -19,7 +20,7 @@ public final class main extends JavaPlugin {
     // runs on start
         InvUI.getInstance().setPlugin(this);
 
-        currentEvent.getInstance();
+        currentEvent.getInstance(this);
 
         getServer().getPluginManager().registerEvents(new mobKill(), this);
         getServer().getPluginManager().registerEvents(new blockBreak(), this);
