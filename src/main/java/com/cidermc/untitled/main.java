@@ -5,7 +5,6 @@ import com.cidermc.untitled.eventHandlers.blockBreak;
 import com.cidermc.untitled.eventHandlers.mobKill;
 import com.cidermc.untitled.eventHandlers.onJoinLeave;
 import com.cidermc.untitled.gui.ranksGUI;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.xenondevs.invui.InvUI;
 
@@ -22,13 +21,16 @@ public final class main extends JavaPlugin {
 
         currentEvent.getInstance(this);
 
-        getServer().getPluginManager().registerEvents(new mobKill(), this);
+        getServer().getPluginManager().registerEvents(new mobKill(this), this);
         getServer().getPluginManager().registerEvents(new blockBreak(), this);
         getServer().getPluginManager().registerEvents(new onJoinLeave(), this);
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+
+        currentEvent eventInstance = currentEvent.getInstance(this);
+        eventInstance.saveScore();
+
     }
 }
