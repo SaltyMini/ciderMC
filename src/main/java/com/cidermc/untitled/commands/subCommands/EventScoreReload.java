@@ -1,15 +1,14 @@
 package com.cidermc.untitled.commands.subCommands;
 
 import com.cidermc.untitled.commands.CommandStruct;
-import com.cidermc.untitled.currentEvent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 
-public class EventStart extends CommandStruct {
+public class EventScoreReload extends CommandStruct {
 
     @Override
     public String getName() {
-        return "eventStart";
+        return "eventReload";
     }
 
     @Override
@@ -30,7 +29,7 @@ public class EventStart extends CommandStruct {
 
     private final Plugin plugin;
 
-    public EventStart(Plugin plugin) {
+    public EventScoreReload(Plugin plugin) {
         this.plugin = plugin;
     }
 
@@ -38,12 +37,13 @@ public class EventStart extends CommandStruct {
     @Override
     public void commandRun(CommandSender commandSender, String[] args) {
 
-        if(!commandSender.hasPermission("cider.event.start")) { return;
+        if(!commandSender.hasPermission("cider.event.reload")) { return;
         }
 
-        currentEvent eventInstance = currentEvent.getInstance(plugin);
-
-        eventInstance.setEventState(true);
+        commandSender.sendMessage("Reloading event score config");
+        commandSender.sendMessage("If player scores have changed since the edited");
+        commandSender.sendMessage("score file was opened they will be lost");
+        commandSender.sendMessage("do /cider scorereloadconfirm to confirm");
 
     }
 }

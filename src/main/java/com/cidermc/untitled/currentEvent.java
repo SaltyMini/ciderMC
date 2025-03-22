@@ -80,7 +80,18 @@ public class currentEvent {
 
 
 
+    public void eventReload() {
+        saveScore();
 
+        loadFromConfig();
+        return;
+    }
+
+    public void scoreReload() {
+        loadScores();
+
+        return;
+    }
 
     public int getScore(Player player) {
         return playerScores.getOrDefault(player.getName(), 0);

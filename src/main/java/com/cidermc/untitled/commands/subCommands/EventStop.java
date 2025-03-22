@@ -9,7 +9,7 @@ public class EventStop extends CommandStruct {
 
     @Override
     public String getName() {
-        return "events";
+        return "eventStop";
     }
 
     @Override
@@ -24,7 +24,7 @@ public class EventStop extends CommandStruct {
 
     @Override
     public String getSyntax() {
-        return "/events help";
+        return "/cider eventhelp";
     }
 
 
