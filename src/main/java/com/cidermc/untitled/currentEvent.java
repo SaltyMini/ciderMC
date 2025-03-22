@@ -27,6 +27,9 @@ public class currentEvent {
         loadFromConfig();
     }
 
+
+    //TODO file curation if not there and effor checking
+
     public void loadScores() {
         File playerScoresFile = new File(plugin.getDataFolder(), "playerScores.yml");
         FileConfiguration pFile = YamlConfiguration.loadConfiguration(playerScoresFile);
@@ -86,7 +89,12 @@ public class currentEvent {
         playerScores.merge(playerName, score, Integer::sum);
     }
 
-    public void setEventActive(boolean args) {
+    public void setEventState(boolean args) {
+        File playerScoresFile = new File(plugin.getDataFolder(), "events.yml");
+        FileConfiguration eFile = YamlConfiguration.loadConfiguration(playerScoresFile);
+
+        eFile.set("eventActive", args);
+
         this.eventActive = args;
     }
 

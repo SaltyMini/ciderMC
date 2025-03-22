@@ -21,14 +21,8 @@ public class mobKill implements Listener {
 
         if(!eventInstance.getEventState()) { return; } //return if event is not active
         if(!eventInstance.getCurrentEventType().equals("mobKill")) { return; } //checks if its a mobkill event
-        if(eventInstance)
 
         Player player = event.getEntity().getKiller();
-
-
-
-        eventInstance.updateScore(player, 1);
-
 
 
 
