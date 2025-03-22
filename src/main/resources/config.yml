@@ -1,0 +1,5 @@
+per-world-keep-inventory:
+  default: true
+  world: true
+  world_the_end: false
+  world_nether: false

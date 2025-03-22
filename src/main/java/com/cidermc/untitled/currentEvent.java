@@ -63,7 +63,7 @@ public class currentEvent {
         this.target = eFile.getString(currentEvent + ".target", "none");
     }
 
-    private synchronized void saveScore() {
+    public synchronized void saveScore() {
         File playerScoresFile = new File(plugin.getDataFolder(), "playerScores.yml");
         FileConfiguration pFile = YamlConfiguration.loadConfiguration(playerScoresFile);
 
