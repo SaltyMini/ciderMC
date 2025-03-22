@@ -1,4 +1,4 @@
-event: event1
+event: cakeEat
 eventActive: false
 
 event1:
@@ -6,5 +6,9 @@ event1:
   eventType: "mobKill"
   target: "Zombie"
 
+cakeEat:
+  eventName: "Cake Eat Event"
+  eventType: "consume"
+  target: "CAKE"
 
 

@@ -34,7 +34,7 @@ public class MobKill implements Listener {
 
         Player player = event.getEntity().getKiller();
 
-        String targetName = eventInstance.getMobTarget();
+        String targetName = eventInstance.getTarget();
         EntityType entityType = EntityType.valueOf(targetName.toUpperCase());
 
 
