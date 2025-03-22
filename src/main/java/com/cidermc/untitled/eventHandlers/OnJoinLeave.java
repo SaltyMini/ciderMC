@@ -12,7 +12,7 @@ import java.util.Date;
 import static org.bukkit.Bukkit.getServer;
 
 
-public class onJoinLeave implements Listener {
+public class OnJoinLeave implements Listener {
 
 
     @EventHandler

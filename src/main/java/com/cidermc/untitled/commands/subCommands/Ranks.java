@@ -1,11 +1,11 @@
 package com.cidermc.untitled.commands.subCommands;
 
-import com.cidermc.untitled.commands.commandStruct;
-import com.cidermc.untitled.gui.ranksGUI;
+import com.cidermc.untitled.commands.CommandStruct;
+import com.cidermc.untitled.gui.RanksGUI;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class ranks extends commandStruct {
+public class Ranks extends CommandStruct {
     @Override
     public String getName() {
         return "ranks";
@@ -30,7 +30,7 @@ public class ranks extends commandStruct {
     public void commandRun(CommandSender commandSender, String[] args) {
         Player player = (Player) commandSender;
 
-        ranksGUI ranksGUI = new ranksGUI();
+        RanksGUI ranksGUI = new RanksGUI();
         ranksGUI.openGui(player);
 
     }

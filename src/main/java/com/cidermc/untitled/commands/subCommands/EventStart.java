@@ -1,9 +1,9 @@
 package com.cidermc.untitled.commands.subCommands;
 
-import com.cidermc.untitled.commands.commandStruct;
+import com.cidermc.untitled.commands.CommandStruct;
 import org.bukkit.command.CommandSender;
 
-public class events extends commandStruct {
+public class EventStart extends CommandStruct {
 
     @Override
     public String getName() {

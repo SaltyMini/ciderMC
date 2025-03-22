@@ -5,7 +5,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
 import org.jetbrains.annotations.NotNull;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.item.Item;
@@ -18,7 +17,7 @@ import xyz.xenondevs.invui.window.Window;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-public class ranksGUI implements Listener {
+public class RanksGUI implements Listener {
 
     /**
      * Creates a permission-based item that shows different appearance based on permissions
@@ -48,14 +47,14 @@ public class ranksGUI implements Listener {
                         builder.addLoreLines("&7" + requirement);
                     } else {
 
-                        if(rankPlayerHandle.hasRequirementMoney(player, requirements[0])) {
+                        if(RankPlayerHandle.hasRequirementMoney(player, requirements[0])) {
                             builder.addLoreLines("&a" + requirement);
                         } else {
                             builder.addLoreLines("&c" + requirement);
                         }
 
                         if(requirements[1] != null) { //if there is nothing there dont add the lore
-                            if(rankPlayerHandle.hasRequirementMCMMO(player, requirements[1])) {
+                            if(RankPlayerHandle.hasRequirementMCMMO(player, requirements[1])) {
                                 builder.addLoreLines("&a" + requirement);
                             } else {
                                 builder.addLoreLines("&c" + requirement);
@@ -75,7 +74,7 @@ public class ranksGUI implements Listener {
                     Logger log = Logger.getLogger("Minecraft");
 
                     //they have confirmed and clicked again, rank up
-                    boolean tryRankUp = rankPlayerHandle.playerRankUpAttempt(player, displayName, requirements, bonuses);
+                    boolean tryRankUp = RankPlayerHandle.playerRankUpAttempt(player, displayName, requirements, bonuses);
 
                     if(!tryRankUp) {
                         log.warning("Error attemtping to rank up " + player.getName() + "! to " + displayName + "!" );

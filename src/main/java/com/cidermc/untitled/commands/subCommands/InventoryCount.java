@@ -1,6 +1,6 @@
 package com.cidermc.untitled.commands.subCommands;
 
-import com.cidermc.untitled.commands.commandStruct;
+import com.cidermc.untitled.commands.CommandStruct;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -10,7 +10,7 @@ import org.bukkit.inventory.PlayerInventory;
 import static java.lang.Boolean.valueOf;
 import static org.bukkit.Bukkit.getServer;
 
-public class inventoryCount extends commandStruct {
+public class InventoryCount extends CommandStruct {
     @Override
     public String getName() {
         return "inventoryCount";
@@ -35,12 +35,12 @@ public class inventoryCount extends commandStruct {
     @Override
     public void commandRun(CommandSender commandSender, String[] args) {
         Player player = (Player) commandSender;
-        if (player.hasPermission("cider.inventorycount")) {
+        if (!player.hasPermission("cider.inventorycount")) {
             player.sendMessage("You dont have permission to do this");
             return;
         }
 
-        if(!Boolean.parseBoolean(args[0])) {
+        if (args.length == 0) {
             String inventoryCount = String.valueOf(player.getInventory().getSize());
             player.sendMessage("You have: " + inventoryCount + " items in your inventory");
             return;

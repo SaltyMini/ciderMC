@@ -4,14 +4,13 @@ package com.cidermc.untitled.commands.subCommands;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class tabCompleter implements TabCompleter {
+public class TabCompleter implements org.bukkit.command.TabCompleter {
     @Override
     public List<String> onTabComplete(@NotNull CommandSender commandSender, Command command, String alias, String[] args) {
         if(!command.getLabel().equalsIgnoreCase("inventorycount")

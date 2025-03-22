@@ -10,7 +10,7 @@ import java.util.Objects;
 import static org.bukkit.Bukkit.getServer;
 
 
-public class rankPlayerHandle implements Listener {
+public class RankPlayerHandle implements Listener {
 
     public static boolean hasRequirementMoney(Player player, String requirement) {
 
@@ -34,13 +34,13 @@ public class rankPlayerHandle implements Listener {
 
     public static boolean playerRankUpAttempt(Player player, String rank, String[] requirements, String[] bonuses) {
 
-        if(rankPlayerHandle.hasRequirementMoney(player, requirements[0])) {
+        if(RankPlayerHandle.hasRequirementMoney(player, requirements[0])) {
             player.sendMessage("You don't have enough money to buy this rank!");
             return true;
         }
 
         if(requirements[1] != null) {
-            if (rankPlayerHandle.hasRequirementMCMMO(player, requirements[1])) {
+            if (RankPlayerHandle.hasRequirementMCMMO(player, requirements[1])) {
                 player.sendMessage("Your Power Level is not high enough to buy this rank!");
                 return true;
             }

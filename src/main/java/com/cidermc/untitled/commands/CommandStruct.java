@@ -1,9 +1,8 @@
 package com.cidermc.untitled.commands;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
-public abstract class commandStruct {
+public abstract class CommandStruct {
 
     public abstract String getName(); //name of command
     public abstract String getDescription(); //description of command

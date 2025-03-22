@@ -1,10 +1,10 @@
 package com.cidermc.untitled;
 
-import com.cidermc.untitled.commands.commandManager;
-import com.cidermc.untitled.eventHandlers.blockBreak;
-import com.cidermc.untitled.eventHandlers.mobKill;
-import com.cidermc.untitled.eventHandlers.onJoinLeave;
-import com.cidermc.untitled.gui.ranksGUI;
+import com.cidermc.untitled.commands.CommandManager;
+import com.cidermc.untitled.eventHandlers.BlockBreak;
+import com.cidermc.untitled.eventHandlers.MobKill;
+import com.cidermc.untitled.eventHandlers.OnJoinLeave;
+import com.cidermc.untitled.gui.RanksGUI;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.xenondevs.invui.InvUI;
 
@@ -14,16 +14,16 @@ public final class main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Objects.requireNonNull(getCommand("cider")).setExecutor(new commandManager());
-        getServer().getPluginManager().registerEvents(new ranksGUI(), this);
+        Objects.requireNonNull(getCommand("cider")).setExecutor(new CommandManager());
+        getServer().getPluginManager().registerEvents(new RanksGUI(), this);
     // runs on start
         InvUI.getInstance().setPlugin(this);
 
         currentEvent.getInstance(this);
 
-        getServer().getPluginManager().registerEvents(new mobKill(this), this);
-        getServer().getPluginManager().registerEvents(new blockBreak(), this);
-        getServer().getPluginManager().registerEvents(new onJoinLeave(), this);
+        getServer().getPluginManager().registerEvents(new MobKill(this), this);
+        getServer().getPluginManager().registerEvents(new BlockBreak(), this);
+        getServer().getPluginManager().registerEvents(new OnJoinLeave(), this);
     }
 
     @Override

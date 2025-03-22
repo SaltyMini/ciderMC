@@ -5,11 +5,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.plugin.Plugin;
 
-import java.util.ArrayList;
+public class MobKill implements Listener {
 
-public class mobKill implements Listener {
+    private final Plugin plugin;
 
+    public MobKill(Plugin plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onMobKill(EntityDeathEvent event) {
@@ -17,7 +21,8 @@ public class mobKill implements Listener {
          return;
         }
 
-        currentEvent eventInstance = currentEvent.getInstance();
+        currentEvent eventInstance = currentEvent.getInstance(plugin);
+
 
         if(!eventInstance.getEventState()) { return; } //return if event is not active
         if(!eventInstance.getCurrentEventType().equals("mobKill")) { return; } //checks if its a mobkill event
