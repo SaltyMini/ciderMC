@@ -28,7 +28,7 @@ public class EatEvent implements Listener {
         if(!eventInstance.getEventState()) { return; } //return if event is not active
         if(!eventInstance.getCurrentEventType().equals("consume")) { return; }
 
-        if(player.getWorld().getName() != "world") { return; }
+        if(player.getWorld().getName() != "world" || player.getWorld().getName() != "world_nether" ||  player.getWorld().getName() != "world_the_end") { return; }
 
         String targetName = eventInstance.getTarget();
         Material mat = Material.valueOf(targetName.toUpperCase());
