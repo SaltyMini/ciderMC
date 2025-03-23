@@ -12,3 +12,19 @@ cakeEat:
   target: "CAKE"
 
 
+
+#eventTypes
+# bedExplode - no target
+# consume - consumable material (food)
+# playerExp - no target
+# blockExplode - material (tnt only right now)
+# mobKill - entity
+# playerKill - no target
+# craftEvent - itemStack
+#
+#
+#
+#
+#
+
+
