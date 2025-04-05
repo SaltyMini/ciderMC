@@ -38,7 +38,7 @@ public class RanksGUI implements Listener {
                     builder.addLoreLines("&7" + line);
                 }
 
-                builder.addLoreLines("&7 "); //spacer
+                builder.addLoreLines("&7&b-------------"); //spacer
 
                 for (String requirement : requirements) {
 
