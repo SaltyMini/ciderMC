@@ -103,7 +103,7 @@ public class currentEvent {
     }
 
 
-    public String getMobTarget() {
+    public String getTarget() {
         return target;
     }
 
