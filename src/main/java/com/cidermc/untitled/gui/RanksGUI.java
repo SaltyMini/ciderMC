@@ -83,7 +83,6 @@ public class RanksGUI implements Listener {
                 }
 
 
-
                 boolean hasPermission = player.hasPermission(permission); //if they have the permission they have the rank
                 if(hasPermission) {
                     player.sendMessage("You already have the rank " + displayName + "!");
@@ -218,39 +217,42 @@ public class RanksGUI implements Listener {
             "- Has all permissions from previous rank",
             "- 10 Homes", "- /feed (no cooldown)", "- /rtp (no cooldown)", "- /fix", "", "");
 
-    final Item border = new SimpleItem(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE));
-    // Build the GUI
-    Gui gui = Gui.normal()
-            .setStructure(
-                    "# # # # # # # # #",
-                    "# # 1 2 3 4 5 # #",
-                    "# # 6 7 8 9 0 # #",
-                    "# # < > = - . # #",
-                    "# # # # _ # # # #",
-                    "# # # # # # # # #"
-            )
-            .addIngredient('#', border)
-            .addIngredient('1', rank1)
-            .addIngredient('2', rank2)
-            .addIngredient('3', rank3)
-            .addIngredient('4', rank4)
-            .addIngredient('5', rank5)
-            .addIngredient('6', rank6)
-            .addIngredient('7', rank7)
-            .addIngredient('8', rank8)
-            .addIngredient('9', rank9)
-            .addIngredient('0', rank10)
-            .addIngredient('<', rank11)
-            .addIngredient('>', rank12)
-            .addIngredient('=', rank13)
-            .addIngredient('-', rank14)
-            .addIngredient('.', rank15)
-            .addIngredient('_', rank16)
 
-            .build();
 
     public void openGui(Player player) {
         String title = "Ranks";
+
+        final Item border = new SimpleItem(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE));
+        // Build the GUI
+        Gui gui = Gui.normal()
+                .setStructure(
+                        "# # # # # # # # #",
+                        "# # 1 2 3 4 5 # #",
+                        "# # 6 7 8 9 0 # #",
+                        "# # < > = - . # #",
+                        "# # # # _ # # # #",
+                        "# # # # # # # # #"
+                )
+                .addIngredient('#', border)
+                .addIngredient('1', rank1)
+                .addIngredient('2', rank2)
+                .addIngredient('3', rank3)
+                .addIngredient('4', rank4)
+                .addIngredient('5', rank5)
+                .addIngredient('6', rank6)
+                .addIngredient('7', rank7)
+                .addIngredient('8', rank8)
+                .addIngredient('9', rank9)
+                .addIngredient('0', rank10)
+                .addIngredient('<', rank11)
+                .addIngredient('>', rank12)
+                .addIngredient('=', rank13)
+                .addIngredient('-', rank14)
+                .addIngredient('.', rank15)
+                .addIngredient('_', rank16)
+
+                .build();
+
         Window window = Window.single()
                 .setViewer(player)
                 .setTitle(title)

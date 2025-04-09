@@ -1,5 +1,6 @@
 package com.cidermc.untitled.gui;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import net.milkbowl.vault.economy.Economy;
@@ -69,14 +70,18 @@ public class RankPlayerHandle implements Listener {
 
         if(Integer.parseInt(blocksBonus) != 0) {
             //TODO give players blocks
+            player.sendMessage("TODO: You have been given " + blocksBonus + " blocks!");
         }
 
         if(Integer.parseInt(rareKeysBonus) != 0) {
-            //TODO give players key
+            player.sendMessage("TODO: You have been given " + rareKeysBonus + " rare keys!");
+            Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),"crate key give " + player.getName() + " rareKey 1");
         }
 
         if(Integer.parseInt(seasonalKeysBonus) != 0) {
-            //TODO give players key
+
+            player.sendMessage("TODO: You have been given " + seasonalKeysBonus + " seasonal keys!");
+            Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),"crate key give " + player.getName() + " seasonalKey 1");
         }
 
         return false;
