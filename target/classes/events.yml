@@ -1,0 +1,30 @@
+event: cakeEat
+eventActive: false
+
+event1:
+  eventName: "Kill Zombies"
+  eventType: "mobKill"
+  target: "Zombie"
+
+cakeEat:
+  eventName: "Cake Eat Event"
+  eventType: "consume"
+  target: "CAKE"
+
+
+
+#eventTypes
+# bedExplode - no target
+# consume - consumable material (food)
+# playerExp - no target
+# blockExplode - material (tnt only right now)
+# mobKill - entity
+# playerKill - no target
+# craftEvent - itemStack
+# blockBreak - Block mateial
+#
+#
+#
+#
+
+

@@ -32,7 +32,6 @@ public class PlayerKillPlayer implements Listener {
          eventInstance.updateScore(killer, 1);
         }
 
-
     }
 
 }

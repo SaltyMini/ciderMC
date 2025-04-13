@@ -4,19 +4,21 @@ main: com.cidermc.untitled.main
 prefix: cider
 author: Salty
 
-
 commands:
-  inventorysize:
-    description: Count the items in your inventory
-    usage: /cider inventorysize <player>
-  playercount:
-    description: Tracks the player count
-    usage: /cider playercount
+  cider:
+    description: Main plugin command
+    usage: "/cider <subcommand> [args]"
+    aliases: [c]
 
 permissions:
   cider.*:
-  cider.countinventory:
-  cider.playercount:
+    description: Gives access to all cider commands
+    default: op
+  cider.inventorycount:
+    description: Allows checking own inventory
+    default: op
+  cider.inventorycount.other:
+    description: Allows checking other players' inventories
+    default: op
 
 permission-message: You do not have permission to use this command.
-usage: "Usage: /cider [args]"

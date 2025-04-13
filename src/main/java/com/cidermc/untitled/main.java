@@ -24,8 +24,9 @@ public final class main extends JavaPlugin {
 
         currentEvent.getInstance(this);
 
+        //TODO add event handlers for new events
         getServer().getPluginManager().registerEvents(new MobKill(this), this);
-        getServer().getPluginManager().registerEvents(new BlockBreak(), this);
+        getServer().getPluginManager().registerEvents(new BlockBreak(this), this);
         getServer().getPluginManager().registerEvents(new OnJoinLeave(), this);
     }
 
