@@ -1,4 +1,6 @@
 com\cidermc\untitled\eventHandlers\BlockBreak.class
+com\cidermc\untitled\gui\RanksGUI$1.class
+com\cidermc\untitled\gui\RanksGUI.class
 com\cidermc\untitled\gui\RankPlayerHandle.class
 com\cidermc\untitled\eventHandlers\BedExplode.class
 com\cidermc\untitled\commands\subCommands\EventScoreReload.class
@@ -17,6 +19,7 @@ com\cidermc\untitled\commands\subCommands\EventReload.class
 com\cidermc\untitled\commands\subCommands\EventStart.class
 com\cidermc\untitled\commands\subCommands\EventScoreReloadConfirm.class
 com\cidermc\untitled\eventHandlers\CraftEvent.class
+com\cidermc\untitled\main.class
 com\cidermc\untitled\eventHandlers\EatEvent.class
 com\cidermc\untitled\eventHandlers\PlayerKillPlayer.class
 com\cidermc\untitled\commands\CommandStruct.class

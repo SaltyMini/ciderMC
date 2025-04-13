@@ -217,7 +217,7 @@ public class RanksGUI implements Listener {
             "- Has all permissions from previous rank",
             "- 10 Homes", "- /feed (no cooldown)", "- /rtp (no cooldown)", "- /fix", "", "");
 
-
+    private Gui gui;
 
     public void openGui(Player player) {
         String title = "Ranks";
