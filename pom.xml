@@ -17,35 +17,41 @@
     </properties>
 
     <build>
-        <defaultGoal>clean package</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>3.10.1</version>
                 <configuration>
-                    <release>${java.version}</release>
+                    <source>21</source>
+                    <target>21</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.2</version>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.0</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.cidermc.untitled.Main</mainClass> <!-- Replace with your main class -->
-                        </manifest>
-                    </archive>
+                    <minimizeJar>false</minimizeJar>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <relocations>
+                                <relocation>
+                                    <pattern>xyz.xenondevs.invui</pattern>
+                                    <shadedPattern>com.cidermc.shaded.invui</shadedPattern>
+                                </relocation>
+                            </relocations>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>false</filtering> <!-- Set to false for plugin.yml -->
-            </resource>
-        </resources>
     </build>
 
     <repositories>

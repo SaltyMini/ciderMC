@@ -3,6 +3,7 @@ version: '1.0-SNAPSHOT'
 main: com.cidermc.untitled.main
 prefix: cider
 author: Salty
+api-version: 1.21
 
 commands:
   cider:
