@@ -21,20 +21,20 @@ public class CommandManager implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(!command.getLabel().equalsIgnoreCase("cider")) { return true; }
 
         if(command.getLabel().equalsIgnoreCase("cider")) {
             // Check if args is empty
+
+             if (args.length == 0) {
+                  commandSender.sendMessage("Use /cider help to see available commands");
+                 return true;
+             }
 
             if(args[0].equalsIgnoreCase("help")) {
                 help(commandSender, args);
                 return true;
             }
 
-             if (args.length == 0) {
-                  commandSender.sendMessage("Use /cider help to see available commands");
-                 return true;
-             }
         }
 
         for (CommandStruct cmd : getCommandStruct()) {
