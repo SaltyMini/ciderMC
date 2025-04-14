@@ -21,14 +21,14 @@ public class BedExplode implements Listener {
     public void blockInteract(PlayerInteractEvent event) {
 
         if(event.getClickedBlock() == null || !event.getClickedBlock().getType().toString().contains("BED")) {
-        currentEvent eventInstance = currentEvent.getInstance(plugin);
+            currentEvent eventInstance = currentEvent.getInstance(plugin);
 
-        if(!eventInstance.getEventState()) { return; } //return if event is not active
-        if(!eventInstance.getCurrentEventType().equals("bedExplode")) { return; }
+            if(!eventInstance.getEventState()) { return; } //return if event is not active
+            if(eventInstance.getCurrentEventType().equals("bedExplode")) { return; }
 
-            if(event.getPlayer().getWorld().toString().equalsIgnoreCase("world_nether") || event.getPlayer().getWorld().toString().equalsIgnoreCase("world_the_end")) {
-                Player player = event.getPlayer();
-                eventInstance.updateScore(player, 1);
+                if(event.getPlayer().getWorld().getName().equalsIgnoreCase("world_nether") || event.getPlayer().getWorld().toString().equalsIgnoreCase("world_the_end")) {
+                    Player player = event.getPlayer();
+                    eventInstance.updateScore(player, 1);
             }
         }
 
