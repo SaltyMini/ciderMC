@@ -22,20 +22,40 @@ public class CommandManager implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(!command.getLabel().equalsIgnoreCase("cider")) { return true; }
-        // Check if args is empty
-        if (args.length == 0) {
-            commandSender.sendMessage("Use /cider help to see available commands");
-            return true;
+
+        if(command.getLabel().equalsIgnoreCase("cider")) {
+            // Check if args is empty
+
+            if(args[0].equalsIgnoreCase("help")) {
+                help(commandSender, args);
+                return true;
+            }
+
+             if (args.length == 0) {
+                  commandSender.sendMessage("Use /cider help to see available commands");
+                 return true;
+             }
         }
 
-        // Handle help command
+        for (CommandStruct cmd : getCommandStruct()) {
+            if (command.getLabel().equalsIgnoreCase(cmd.getName())) {
+                cmd.commandRun(commandSender, args);
+                return true;
+            }
+        }
+
+        return true;
+    }
+
+    public void help(CommandSender commandSender, String[] args) {
+// Handle help command
         if (args[0].equalsIgnoreCase("help")) {
             // If there's a second argument, show help for that specific command
             if (args.length > 1) {
                 for (CommandStruct cmd : getCommandStruct()) {
                     if (cmd.getName().equalsIgnoreCase(args[1])) {
                         commandSender.sendMessage(cmd.getSyntax() + " - " + cmd.getDescription());
-                        return true;
+                        return;
                     }
                 }
                 commandSender.sendMessage("Command not found: " + args[1]);
@@ -44,24 +64,8 @@ public class CommandManager implements CommandExecutor {
                     commandSender.sendMessage("/" + cmd.getName() + " - " + cmd.getDescription());
                 }
             }
-            return true;
+            return;
         }
-
-        // Handle other commands
-        for (CommandStruct cmd : getCommandStruct()) {
-            if (args[0].equalsIgnoreCase(cmd.getName())) {
-                if (commandSender instanceof Player player) {
-                    cmd.commandRun(commandSender, args);
-                } else {
-                    commandSender.sendMessage("You cannot run cider commands in the console");
-                }
-                return true;
-            }
-        }
-
-        // Command not found
-        commandSender.sendMessage("Unknown command. Use /cider help to see available commands");
-        return true;
     }
 
     public ArrayList<CommandStruct> getCommandStruct() {
