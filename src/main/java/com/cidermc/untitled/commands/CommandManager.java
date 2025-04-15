@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CommandManager implements CommandExecutor {
 
@@ -38,7 +39,11 @@ public class CommandManager implements CommandExecutor {
         }
 
         for (CommandStruct cmd : getCommandStruct()) {
-            if (command.getLabel().equalsIgnoreCase(cmd.getName())) {
+            if (command.getLabel().equalsIgnoreCase(cmd.getName())
+                    || args[0].equalsIgnoreCase(cmd.getName())
+                    || Arrays.asList(cmd.getAliases()).contains(command.getLabel())
+                    || Arrays.asList(cmd.getAliases()).contains(args[0])
+            ) {
                 cmd.commandRun(commandSender, args);
                 return true;
             }
