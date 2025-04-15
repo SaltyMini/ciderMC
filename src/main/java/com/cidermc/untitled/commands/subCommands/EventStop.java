@@ -27,6 +27,11 @@ public class EventStop extends CommandStruct {
         return "/cider eventhelp";
     }
 
+    @Override
+    public String[] getAliases() {
+        return new String[0];
+    }
+
 
     private final Plugin plugin;
 

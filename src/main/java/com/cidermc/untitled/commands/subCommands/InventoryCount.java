@@ -31,6 +31,11 @@ public class InventoryCount extends CommandStruct {
         return "/cider inventorycount";
     }
 
+    @Override
+    public String[] getAliases() {
+        return new String[0];
+    }
+
 
     @Override
     public void commandRun(CommandSender commandSender, String[] args) {

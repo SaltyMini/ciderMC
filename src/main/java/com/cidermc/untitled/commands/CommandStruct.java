@@ -8,6 +8,7 @@ public abstract class CommandStruct {
     public abstract String getDescription(); //description of command
     public abstract String commandType();
     public abstract String getSyntax(); //correct command syntax
+    public abstract String[] getAliases(); //aliases for command
 
     public abstract void commandRun(CommandSender commandSender, String[] args); //vars to be passed into command methodvars for console command method
 

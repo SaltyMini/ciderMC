@@ -27,6 +27,11 @@ public class EventScoreReloadConfirm extends CommandStruct {
         return "/cider eventshelp";
     }
 
+    @Override
+    public String[] getAliases() {
+        return new String[0];
+    }
+
 
     private final Plugin plugin;
 
