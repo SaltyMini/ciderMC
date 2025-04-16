@@ -28,15 +28,19 @@ public class Ranks extends CommandStruct {
 
     @Override
     public String[] getAliases() {
-        return new String[0];
+        return new String[] {"ranks", "r"};
     }
 
     @Override
     public void commandRun(CommandSender commandSender, String[] args) {
         Player player = (Player) commandSender;
 
-        RanksGUI ranksGUI = new RanksGUI();
-        ranksGUI.openGui(player);
+        try {
+            RanksGUI ranksGUI = new RanksGUI();
+            ranksGUI.openGui(player);
+        } catch (Exception e) {
+            commandSender.sendMessage(e.getMessage());
+        }
 
     }
 }
