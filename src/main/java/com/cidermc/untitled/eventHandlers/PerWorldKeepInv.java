@@ -16,7 +16,7 @@ public class PerWorldKeepInv implements Listener {
 
     private final Plugin plugin;
 
-    private PerWorldKeepInv(Plugin plugin) {
+    public PerWorldKeepInv(Plugin plugin) {
         this.plugin = plugin;
     }
     @EventHandler
