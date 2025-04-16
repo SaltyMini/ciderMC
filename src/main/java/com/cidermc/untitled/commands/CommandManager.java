@@ -18,6 +18,7 @@ public class CommandManager implements CommandExecutor {
     public CommandManager() {
         commandStruct.add(new InventoryCount()); //adds inventoryCount command to command structure
         commandStruct.add(new Ranks());
+        //TODO: add new commands
     }
 
     @Override
@@ -37,8 +38,7 @@ public class CommandManager implements CommandExecutor {
             }
 
             for (CommandStruct cmd : getCommandStruct()) {
-                if (command.getLabel().equalsIgnoreCase(cmd.getName())
-                        || args[0].equalsIgnoreCase(cmd.getName())
+                if (args[0].equalsIgnoreCase(cmd.getName())
                         || Arrays.asList(cmd.getAliases()).contains(args[0])) {
                     commandSender.sendMessage("Command found: " + cmd.getName());
                     cmd.commandRun(commandSender, args);
@@ -60,23 +60,25 @@ public class CommandManager implements CommandExecutor {
     }
 
     public void help(CommandSender commandSender, String[] args) {
-// Handle help command
+    // Handle help command
         if (args[0].equalsIgnoreCase("help")) {
-            // If there's a second argument, show help for that specific command
-            if (args.length > 1) {
-                for (CommandStruct cmd : getCommandStruct()) {
-                    if (cmd.getName().equalsIgnoreCase(args[1])) {
-                        commandSender.sendMessage(cmd.getSyntax() + " - " + cmd.getDescription());
-                        return;
-                    }
-                }
-                commandSender.sendMessage("Command not found: " + args[1]);
-            } else { // Otherwise show all commands
-                for (CommandStruct cmd : getCommandStruct()) {
-                    commandSender.sendMessage("/" + cmd.getName() + " - " + cmd.getDescription());
+
+            int countMax;
+
+            try {
+                countMax = Integer.parseInt(args[0]) * 10;
+            } catch (NumberFormatException e) {
+                countMax = 10;
+            }
+
+            int count = countMax - 10;
+
+            for(CommandStruct cmd : getCommandStruct()) {
+                while (count < countMax) {
+                    commandSender.sendMessage("/" + cmd.getSyntax() + " - " + cmd.getDescription());
+                    count++;
                 }
             }
-            return;
         }
     }
 
