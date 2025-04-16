@@ -36,13 +36,20 @@ public class CommandManager implements CommandExecutor {
                 return true;
             }
 
+            for (CommandStruct cmd : getCommandStruct()) {
+                if (command.getLabel().equalsIgnoreCase(cmd.getName())
+                        || args[0].equalsIgnoreCase(cmd.getName())
+                        || Arrays.asList(cmd.getAliases()).contains(args[0])
+                ) {
+                    cmd.commandRun(commandSender, args);
+                }
+            }
+
         }
 
         for (CommandStruct cmd : getCommandStruct()) {
             if (command.getLabel().equalsIgnoreCase(cmd.getName())
-                    || args[0].equalsIgnoreCase(cmd.getName())
                     || Arrays.asList(cmd.getAliases()).contains(command.getLabel())
-                    || Arrays.asList(cmd.getAliases()).contains(args[0])
             ) {
                 cmd.commandRun(commandSender, args);
                 return true;
