@@ -34,9 +34,11 @@ public class Ranks extends CommandStruct {
 
     @Override
     public void commandRun(CommandSender commandSender, String[] args) {
-        Player player = (Player) commandSender;
-        player.sendMessage("FDHBiSDHU");
 
+        if (!(commandSender instanceof Player player)) {
+            commandSender.sendMessage("This command can only be used by players");
+            return;
+        }
 
         try {
             main plugin = main.getPlugin(main.class);
