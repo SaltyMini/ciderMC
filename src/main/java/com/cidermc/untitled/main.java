@@ -1,9 +1,7 @@
 package com.cidermc.untitled;
 
 import com.cidermc.untitled.commands.CommandManager;
-import com.cidermc.untitled.eventHandlers.BlockBreak;
-import com.cidermc.untitled.eventHandlers.MobKill;
-import com.cidermc.untitled.eventHandlers.OnJoinLeave;
+import com.cidermc.untitled.eventHandlers.*;
 import com.cidermc.untitled.gui.RanksGUI;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.xenondevs.invui.InvUI;
@@ -24,10 +22,8 @@ public final class main extends JavaPlugin {
 
         currentEvent.getInstance(this);
 
-        //TODO add event handlers for new events
-        getServer().getPluginManager().registerEvents(new MobKill(this), this);
-        getServer().getPluginManager().registerEvents(new BlockBreak(this), this);
-        getServer().getPluginManager().registerEvents(new OnJoinLeave(), this);
+        registerEvents();
+
     }
 
     @Override
@@ -36,6 +32,20 @@ public final class main extends JavaPlugin {
         currentEvent eventInstance = currentEvent.getInstance(this);
         eventInstance.saveScore();
 
+    }
+
+    private void registerEvents() {
+        var pm = getServer().getPluginManager();
+        pm.registerEvents(new RanksGUI(), this);
+        pm.registerEvents(new BedExplode(this), this);
+        pm.registerEvents(new BlockBreak(this), this);
+        pm.registerEvents(new CraftEvent(this), this);
+        pm.registerEvents(new EatEvent(this), this);
+        pm.registerEvents(new ExpEvent(this), this);
+        pm.registerEvents(new ExplodeEvent(this), this);
+        pm.registerEvents(new MobKill(this), this);
+        pm.registerEvents(new PerWorldKeepInv(this), this);
+        pm.registerEvents(new PlayerKillPlayer(this), this);
     }
 
     private void generateConfigs() {
