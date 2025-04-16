@@ -220,11 +220,12 @@ public class RanksGUI implements Listener {
     private Gui gui;
 
     public void openGui(Player player) {
+        player.sendMessage("Opening ranks GUI...");
         String title = "Ranks";
 
         final Item border = new SimpleItem(new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE));
         // Build the GUI
-        Gui gui = Gui.normal()
+        this.gui = Gui.normal()
                 .setStructure(
                         "# # # # # # # # #",
                         "# # 1 2 3 4 5 # #",
@@ -258,6 +259,7 @@ public class RanksGUI implements Listener {
                 .setTitle(title)
                 .setGui(gui)
                 .build();
-        //To open the GUI use ranksGUI.getInstance().openGui(player);
+
+        window.open();
     }
 }

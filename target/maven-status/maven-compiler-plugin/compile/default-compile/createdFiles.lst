@@ -12,7 +12,6 @@ com\cidermc\untitled\commands\subCommands\EventStop.class
 com\cidermc\untitled\currentEvent.class
 com\cidermc\untitled\eventHandlers\ExpEvent.class
 com\cidermc\untitled\commands\subCommands\TabCompleter.class
-com\cidermc\untitled\eventHandlers\OnJoinLeave.class
 com\cidermc\untitled\commands\CommandManager.class
 com\cidermc\untitled\eventHandlers\ExplodeEvent.class
 com\cidermc\untitled\commands\subCommands\EventReload.class
@@ -23,5 +22,4 @@ com\cidermc\untitled\main.class
 com\cidermc\untitled\eventHandlers\EatEvent.class
 com\cidermc\untitled\eventHandlers\PlayerKillPlayer.class
 com\cidermc\untitled\commands\CommandStruct.class
-com\cidermc\untitled\eventHandlers\OnJoinLeave$dateUtil.class
 com\cidermc\untitled\eventHandlers\MobKill.class

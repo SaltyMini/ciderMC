@@ -33,7 +33,7 @@ public class InventoryCount extends CommandStruct {
 
     @Override
     public String[] getAliases() {
-        return new String[0];
+        return new String[] {"invcount", "ic"};
     }
 
 
@@ -45,12 +45,14 @@ public class InventoryCount extends CommandStruct {
             return;
         }
 
-        if (args.length == 0) {
+        if (args[0] == null) {
             String inventoryCount = String.valueOf(player.getInventory().getSize());
             player.sendMessage("You have: " + inventoryCount + " items in your inventory");
             return;
         }
 
+
+        //TODO: FIX THIS
         if(Boolean.parseBoolean(args[0]) && !Boolean.parseBoolean(args[1])) {
             if(getServer().getOnlinePlayers().contains(args[0])) {
                 String inventoryCount = String.valueOf(player.getInventory().getSize());

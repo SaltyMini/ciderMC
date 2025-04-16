@@ -10,20 +10,26 @@ import java.io.File;
 import java.util.Objects;
 
 public final class main extends JavaPlugin {
+    private RanksGUI ranksGUI;
 
     @Override
     public void onEnable() {
         generateConfigs();
 
+        this.ranksGUI = new RanksGUI();
+        getServer().getPluginManager().registerEvents(this.ranksGUI, this);
+
         Objects.requireNonNull(getCommand("cider")).setExecutor(new CommandManager());
-        getServer().getPluginManager().registerEvents(new RanksGUI(), this);
-    // runs on start
+        Objects.requireNonNull(getCommand("ranks")).setExecutor(new CommandManager());
+        Objects.requireNonNull(getCommand("inventorycount")).setExecutor(new CommandManager());
+
         InvUI.getInstance().setPlugin(this);
-
         currentEvent.getInstance(this);
-
         registerEvents();
 
+    }
+    public RanksGUI getRanksGUI() {
+        return ranksGUI;
     }
 
     @Override
@@ -36,7 +42,6 @@ public final class main extends JavaPlugin {
 
     private void registerEvents() {
         var pm = getServer().getPluginManager();
-        pm.registerEvents(new RanksGUI(), this);
         pm.registerEvents(new BedExplode(this), this);
         pm.registerEvents(new BlockBreak(this), this);
         pm.registerEvents(new CraftEvent(this), this);

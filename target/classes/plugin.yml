@@ -10,6 +10,14 @@ commands:
     description: Main plugin command
     usage: "/cider <subcommand> [args]"
     aliases: [c]
+  ranks:
+    description: Open the ranks GUI
+    usage: "/ranks"
+    aliases: [rank, r]
+  inventoryCount:
+    description: Check the number of items in your inventory
+    usage: "/inventoryCount"
+    aliases: [ic, invcount]
 
 permissions:
   cider.*:

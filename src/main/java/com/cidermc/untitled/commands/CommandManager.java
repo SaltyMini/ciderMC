@@ -39,8 +39,8 @@ public class CommandManager implements CommandExecutor {
             for (CommandStruct cmd : getCommandStruct()) {
                 if (command.getLabel().equalsIgnoreCase(cmd.getName())
                         || args[0].equalsIgnoreCase(cmd.getName())
-                        || Arrays.asList(cmd.getAliases()).contains(args[0])
-                ) {
+                        || Arrays.asList(cmd.getAliases()).contains(args[0])) {
+                    commandSender.sendMessage("Command found: " + cmd.getName());
                     cmd.commandRun(commandSender, args);
                 }
             }
@@ -49,8 +49,8 @@ public class CommandManager implements CommandExecutor {
 
         for (CommandStruct cmd : getCommandStruct()) {
             if (command.getLabel().equalsIgnoreCase(cmd.getName())
-                    || Arrays.asList(cmd.getAliases()).contains(command.getLabel())
-            ) {
+                    || Arrays.asList(cmd.getAliases()).contains(command.getLabel())) {
+                commandSender.sendMessage("Command found: " + cmd.getName());
                 cmd.commandRun(commandSender, args);
                 return true;
             }

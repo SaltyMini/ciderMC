@@ -2,6 +2,7 @@ package com.cidermc.untitled.commands.subCommands;
 
 import com.cidermc.untitled.commands.CommandStruct;
 import com.cidermc.untitled.gui.RanksGUI;
+import com.cidermc.untitled.main;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -34,12 +35,15 @@ public class Ranks extends CommandStruct {
     @Override
     public void commandRun(CommandSender commandSender, String[] args) {
         Player player = (Player) commandSender;
+        player.sendMessage("FDHBiSDHU");
+
 
         try {
-            RanksGUI ranksGUI = new RanksGUI();
-            ranksGUI.openGui(player);
+            main plugin = main.getPlugin(main.class);
+            plugin.getRanksGUI().openGui(player);
+            player.sendMessage("Opening ranks GUI");
         } catch (Exception e) {
-            commandSender.sendMessage(e.getMessage());
+            commandSender.sendMessage("Error opening GUI: " + e.getMessage());
         }
 
     }
