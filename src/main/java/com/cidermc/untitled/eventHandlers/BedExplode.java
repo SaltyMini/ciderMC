@@ -20,7 +20,7 @@ public class BedExplode implements Listener {
     @EventHandler
     public void blockInteract(PlayerInteractEvent event) {
 
-        if(event.getClickedBlock() == null || !event.getClickedBlock().getType().toString().contains("BED")) {
+        if(event.getClickedBlock() == null && !event.getClickedBlock().getType().toString().contains("BED")) {
             currentEvent eventInstance = currentEvent.getInstance(plugin);
 
             if(!eventInstance.getEventState()) { return; } //return if event is not active
