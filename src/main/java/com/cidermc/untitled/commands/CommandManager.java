@@ -40,7 +40,6 @@ public class CommandManager implements CommandExecutor {
             for (CommandStruct cmd : getCommandStruct()) {
                 if (args[0].equalsIgnoreCase(cmd.getName())
                         || Arrays.asList(cmd.getAliases()).contains(args[0])) {
-                    commandSender.sendMessage("Command found: " + cmd.getName());
                     cmd.commandRun(commandSender, args);
                 }
             }
@@ -50,7 +49,15 @@ public class CommandManager implements CommandExecutor {
         for (CommandStruct cmd : getCommandStruct()) {
             if (command.getLabel().equalsIgnoreCase(cmd.getName())
                     || Arrays.asList(cmd.getAliases()).contains(command.getLabel())) {
-                commandSender.sendMessage("Command found: " + cmd.getName());
+
+                if (args[0].equalsIgnoreCase("help")) {
+                    commandSender.sendMessage("Command name: " + cmd.getName());
+                    commandSender.sendMessage("Command help: " + cmd.getDescription());
+                    commandSender.sendMessage("Command syntax: " + cmd.getSyntax());
+                    commandSender.sendMessage("Command aliases: " + Arrays.toString(cmd.getAliases()));
+                    return true;
+                }
+
                 cmd.commandRun(commandSender, args);
                 return true;
             }
