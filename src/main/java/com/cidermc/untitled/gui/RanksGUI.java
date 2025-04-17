@@ -36,32 +36,32 @@ public class RanksGUI implements Listener {
                 boolean hasPermission = player.hasPermission(permission);
 
                 ItemBuilder builder = new ItemBuilder(hasPermission ? unlockedMaterial : lockedMaterial)
-                        .setDisplayName("&6" + displayName);
+                        .setDisplayName("§6" + displayName);
 
                 for (String line : loreLines) {
-                    builder.addLoreLines("&7" + line);
+                    builder.addLoreLines("§7" + line);
                 }
 
-                builder.addLoreLines("&7&b-------------"); //spacer
+                builder.addLoreLines("§7§b-------------"); //spacer
 
                 for (String requirement : requirements) {
 
                     //if they have the rank make it green
                     if(player.hasPermission(permission)) {
-                        builder.addLoreLines("&7" + requirement);
+                        builder.addLoreLines("§7" + requirement);
                     } else {
 
                         if(RankPlayerHandle.hasRequirementMoney(player, requirements[0])) {
-                            builder.addLoreLines("&a" + requirement);
+                            builder.addLoreLines("§a" + requirement);
                         } else {
-                            builder.addLoreLines("&c" + requirement);
+                            builder.addLoreLines("§c" + requirement);
                         }
 
                         if(requirements.length > 1 && requirements[1] != null) { //if there is nothing there dont add the lore
                             if(RankPlayerHandle.hasRequirementMCMMO(player, requirements[1])) {
-                                builder.addLoreLines("&a" + requirement);
+                                builder.addLoreLines("§a" + requirement);
                             } else {
-                                builder.addLoreLines("&c" + requirement);
+                                builder.addLoreLines("§c" + requirement);
                             }
                         }
 
