@@ -21,6 +21,8 @@ import java.util.logging.Logger;
 
 public class RanksGUI implements Listener {
 
+
+
     /**
      * Creates a permission-based item that shows different appearance based on permissions
      */
@@ -235,7 +237,7 @@ public class RanksGUI implements Listener {
             "- 10 Homes", "- /feed (no cooldown)", "- /rtp (no cooldown)", "- /fix", "", "");
 
     private Gui gui;
-    private final Map<Player, Window> playerWindows = new HashMap<>();
+    private static final Map<Player, Window> playerWindows = new HashMap<>();
 
     public void openGui(Player player) {
         player.sendMessage("Opening ranks GUI...");
@@ -282,7 +284,7 @@ public class RanksGUI implements Listener {
         window.open();
     }
 
-    public void closeGui(Player player) {
+    public static void closeGUI(Player player) {
         Window window = playerWindows.get(player);
         if (window != null) {
             window.close();

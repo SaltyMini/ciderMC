@@ -104,6 +104,8 @@ public class RankPlayerHandle implements Listener {
             Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),"crate key give " + player.getName() + " seasonalKey 1");
         }
 
+        RanksGUI.closeGUI(player);
+
         return false;
     }
 
