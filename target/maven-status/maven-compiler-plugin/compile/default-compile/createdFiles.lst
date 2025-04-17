@@ -22,4 +22,5 @@ com\cidermc\untitled\main.class
 com\cidermc\untitled\eventHandlers\EatEvent.class
 com\cidermc\untitled\eventHandlers\PlayerKillPlayer.class
 com\cidermc\untitled\commands\CommandStruct.class
+com\cidermc\untitled\gui\RanksGUI$1$1.class
 com\cidermc\untitled\eventHandlers\MobKill.class

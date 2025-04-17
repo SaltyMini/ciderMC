@@ -23,14 +23,12 @@ public class CommandManager implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-
+        // Handle /cider command
         if(command.getLabel().equalsIgnoreCase("cider")) {
-            // Check if args is empty
-
-             if (args.length == 0) {
-                  commandSender.sendMessage("Use /cider help to see available commands");
-                 return true;
-             }
+            if (args.length == 0) {
+                commandSender.sendMessage("Use /cider help to see available commands");
+                return true;
+            }
 
             if(args[0].equalsIgnoreCase("help")) {
                 help(commandSender, args);
@@ -41,16 +39,18 @@ public class CommandManager implements CommandExecutor {
                 if (args[0].equalsIgnoreCase(cmd.getName())
                         || Arrays.asList(cmd.getAliases()).contains(args[0])) {
                     cmd.commandRun(commandSender, args);
+                    return true;
                 }
             }
-
         }
 
+        // Handle direct commands like /ranks
         for (CommandStruct cmd : getCommandStruct()) {
             if (command.getLabel().equalsIgnoreCase(cmd.getName())
                     || Arrays.asList(cmd.getAliases()).contains(command.getLabel())) {
 
-                if (args[0].equalsIgnoreCase("help")) {
+                // Special handling for help argument
+                if (args.length > 0 && args[0].equalsIgnoreCase("help")) {
                     commandSender.sendMessage("Command name: " + cmd.getName());
                     commandSender.sendMessage("Command help: " + cmd.getDescription());
                     commandSender.sendMessage("Command syntax: " + cmd.getSyntax());
@@ -58,6 +58,7 @@ public class CommandManager implements CommandExecutor {
                     return true;
                 }
 
+                // Execute command with empty or provided args
                 cmd.commandRun(commandSender, args);
                 return true;
             }
@@ -80,12 +81,12 @@ public class CommandManager implements CommandExecutor {
 
             int count = countMax - 10;
 
-            for(CommandStruct cmd : getCommandStruct()) {
-                while (count < countMax) {
-                    commandSender.sendMessage("/" + cmd.getSyntax() + " - " + cmd.getDescription());
-                    count++;
-                }
+            commandSender.sendMessage("=== Command Help (Page " + args[1] + ") ===");
+            for (int i = count; i < countMax; i++) {
+                CommandStruct cmd = getCommandStruct().get(i);
+                commandSender.sendMessage("/" + cmd.getSyntax() + " - " + cmd.getDescription());
             }
+
         }
     }
 

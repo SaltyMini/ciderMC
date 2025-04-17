@@ -14,8 +14,13 @@ import static org.bukkit.Bukkit.getServer;
 public class RankPlayerHandle implements Listener {
 
     public static boolean hasRequirementMoney(Player player, String requirement) {
-
         String moneyRequirment = requirement;
+
+        if (!(moneyRequirment.charAt(0) == '$')) {
+            player.sendMessage(requirement);
+            throw new IllegalArgumentException("Invalid money requirement format. Expected format: $<amount>");
+        }
+
         moneyRequirment = moneyRequirment.substring(1); //Remove $ sign
 
         Economy economy = Objects.requireNonNull(getServer().getServicesManager().getRegistration(Economy.class)).getProvider();
@@ -35,30 +40,45 @@ public class RankPlayerHandle implements Listener {
 
     public static boolean playerRankUpAttempt(Player player, String rank, String[] requirements, String[] bonuses) {
 
-        if(RankPlayerHandle.hasRequirementMoney(player, requirements[0])) {
+        String moneyRequirment = requirements[0];
+
+        if (!(moneyRequirment.charAt(0) == '$')) {
+            throw new IllegalArgumentException("Invalid money requirement format. Expected format: $<amount>");
+        }
+
+        moneyRequirment = moneyRequirment.substring(1); //Remove $ sign
+        Economy economy = Objects.requireNonNull(getServer().getServicesManager().getRegistration(Economy.class)).getProvider();
+
+        player.sendMessage("Attempting to rank up to " + rank);
+
+        if(!economy.has(player, Double.parseDouble(moneyRequirment))) {
+            player.sendMessage(moneyRequirment);
+
             player.sendMessage("You don't have enough money to buy this rank!");
             return true;
         }
 
-        if(requirements[1] != null) {
+
+        player.sendMessage("Removing " + moneyRequirment + " from your balance!");
+        economy.withdrawPlayer(player, Double.parseDouble(moneyRequirment));
+
+
+        if(requirements.length > 1) {
             if (RankPlayerHandle.hasRequirementMCMMO(player, requirements[1])) {
                 player.sendMessage("Your Power Level is not high enough to buy this rank!");
                 return true;
             }
         }
-
-        //remove money
-        String moneyRequirment = requirements[0];
-        moneyRequirment = moneyRequirment.substring(1); //Remove $ sign
+        //TODO: CHECK THE REST OF MCMMO
 
 
-        Economy economy = Objects.requireNonNull(getServer().getServicesManager().getRegistration(Economy.class)).getProvider();
-        economy.withdrawPlayer(player, Double.parseDouble(moneyRequirment));
+        //rank the player up#
 
-        //rank the player up
 
         getServer().dispatchCommand(getServer().getConsoleSender(), "lp user " + player.getName() + " promote ranks");
         getServer().dispatchCommand(getServer().getConsoleSender(), "tags set " + player.getName() + " " + rank);
+        player.sendMessage("You have been ranked up to " + rank + "!");
+
 
         String blocksBonus = bonuses[0];
         String rareKeysBonus = bonuses[1];

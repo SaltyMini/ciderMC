@@ -14,6 +14,8 @@ import xyz.xenondevs.invui.item.impl.AbstractItem;
 import xyz.xenondevs.invui.item.impl.SimpleItem;
 import xyz.xenondevs.invui.window.Window;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -42,7 +44,7 @@ public class RanksGUI implements Listener {
 
                 for (String requirement : requirements) {
 
-                    //if they have the rank make it gold
+                    //if they have the rank make it green
                     if(player.hasPermission(permission)) {
                         builder.addLoreLines("&7" + requirement);
                     } else {
@@ -53,7 +55,7 @@ public class RanksGUI implements Listener {
                             builder.addLoreLines("&c" + requirement);
                         }
 
-                        if(requirements[1] != null) { //if there is nothing there dont add the lore
+                        if(requirements.length > 1 && requirements[1] != null) { //if there is nothing there dont add the lore
                             if(RankPlayerHandle.hasRequirementMCMMO(player, requirements[1])) {
                                 builder.addLoreLines("&a" + requirement);
                             } else {
@@ -70,20 +72,9 @@ public class RanksGUI implements Listener {
             @Override
             public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent inventoryClickEvent) {
                 Material clickedMaterial = Objects.requireNonNull(inventoryClickEvent.getCurrentItem()).getType();
-                if(clickedMaterial.equals(Material.GOLD_BLOCK)) {
-                    Logger log = Logger.getLogger("Minecraft");
+                player.sendMessage("Clicked item: " + clickedMaterial); // Debug message
 
-                    //they have confirmed and clicked again, rank up
-                    boolean tryRankUp = RankPlayerHandle.playerRankUpAttempt(player, displayName, requirements, bonuses);
-
-                    if(!tryRankUp) {
-                        log.warning("Error attemtping to rank up " + player.getName() + "! to " + displayName + "!" );
-                    }
-
-                }
-
-
-                boolean hasPermission = player.hasPermission(permission); //if they have the permission they have the rank
+                boolean hasPermission = player.hasPermission(permission);
                 if(hasPermission) {
                     player.sendMessage("You already have the rank " + displayName + "!");
                     return;
@@ -91,22 +82,48 @@ public class RanksGUI implements Listener {
 
                 int slot = inventoryClickEvent.getRawSlot();
 
-                //check if they have the previous rank
+                if(clickedMaterial.equals(Material.GOLD_BLOCK)) {
+                    player.sendMessage("Confirmed");
+                    try {
+                        RankPlayerHandle.playerRankUpAttempt(player, displayName, requirements, bonuses);
+                    } catch (Exception e) {
+                        player.sendMessage("Error attempting to rank up " + displayName + "!");
+                        player.sendMessage(e.getMessage());
+                    }
+                    return;
+                }
 
+                // Check previous rank only if not clicking gold block
                 Material previousRankMaterial = Objects.requireNonNull(inventoryClickEvent.getInventory().getItem(slot - 1)).getType();
-
-                if(previousRankMaterial.equals(Material.RED_WOOL)) {
+                if(previousRankMaterial.equals(Material.RED_WOOL) || previousRankMaterial.equals(Material.GOLD_BLOCK)) {
                     player.sendMessage("You cannot rank up to " + displayName + " without having the rank below it!");
                     return;
                 }
 
-                ItemBuilder confirmItemBuilder = new ItemBuilder(Material.GOLD_BLOCK)
-                        .setDisplayName("Click again to confirm");
+                // Create confirmation button with click handling
+                Item confirmItem = new AbstractItem() {
+                    @Override
+                    public ItemProvider getItemProvider(Player p) {
+                        return new ItemBuilder(Material.GOLD_BLOCK)
+                                .setDisplayName("Click again to confirm");
+                    }
 
-                Item updatedItem = new SimpleItem(confirmItemBuilder);
+                    @Override
+                    public void handleClick(@NotNull ClickType clickType, @NotNull Player p, @NotNull InventoryClickEvent event) {
+                        Material material = Objects.requireNonNull(event.getCurrentItem()).getType();
+                        player.sendMessage("Confirmation clicked: " + material);
+                        if(material.equals(Material.GOLD_BLOCK)) {
+                            try {
+                                RankPlayerHandle.playerRankUpAttempt(p, displayName, requirements, bonuses);
+                            } catch (Exception e) {
+                                p.sendMessage("Error attempting to rank up " + displayName + "!");
+                                p.sendMessage(e.getMessage());
+                            }
+                        }
+                    }
+                };
 
-                gui.setItem(slot, updatedItem);
-
+                gui.setItem(slot, confirmItem);
             }
 
         };
@@ -126,98 +143,99 @@ public class RanksGUI implements Listener {
     Item rank2 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Tanner",
             "cider.ranks.tanner",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- +7,500 Claim Blocks","- /pw", "- /poop");
     Item rank3 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Criminal",
             "cider.ranks.criminal",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to purchase 2 Lottery Tickets", "- Access to 1 Dungeon Attempt", "- /fart", "- /sit");
     Item rank4 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Peasant",
             "cider.ranks.peasant",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to create shops", "- 3 Homes","- /tptoggle", "- /bottle", "- /crawl");
     Item rank5 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Farmer", "cider.ranks.farmer",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- +2,500 Claim Blocks", "- Ability to purchase 3 Lottery Tickets", "- Ability to purchase plots at the market", "- 2 Jobs", "- /tpahere");
 
     Item rank6 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Artist",
             "cider.ranks.artist",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to purchase 5 Lottery Tickets", "- 1 Seasonal Key", "- 4 Homes", "- /condense", "- /lay", "- /sell hand");
     Item rank7 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Sculptor",
             "cider.ranks.sculptor",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to purchase 6 Lottery Tickets", "- Ability to sit on top of players", "- Access to 2 Dungeon Attempts", "- /craft", "- /feed (60 second cooldown)");
     Item rank8 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Priest",
             "cider.ranks.priest",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- +5,000 Claim Blocks", "Ability to set 1 Player Warp", "- 5 Homes", "- 3 Jobs", "- /anvil");
     Item rank9 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "High Priest",
             "cider.ranks.highpriest",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to purchase 10 Lottery Tickets", "- Ability to list 1 item in /ah", "- 6 Homes", "- /marry");
     Item rank10 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Ronin",
             "cider.ranks.ronin",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to set 2 Player Warps", "- Access to all balloon cosmetics");
 
     Item rank11 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Samurai",
             "cider.ranks.samurai",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Access to all music cosmetics", "- 4 Jobs", "- /spin", "- /loom", "", "");
     Item rank12 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Minister",
             "cider.ranks.minister",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
   "- Access to all mount cosmetics", "- Access to 3 Dungeon Attempts", "Ability to set 3 Player Warps", "- 2 Rare Keys","- /loom",  "");
     Item rank13 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Shinpan",
             "cider.ranks.shinpan",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Access to X", "- Access to all emote cosmetics", "- 8 Homes", "- /clearinventory", "", "");
     Item rank14 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Daimyo",
             "cider.ranks.daimyo",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Access to all banner cosmetics", "- 5 Jobs", "- /trash", "", "", "");
     Item rank15 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Chancellor",
             "cider.ranks.chancellor",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks", "1 rareKey", "0 seasonalKey"},
             "- Ability to set 4 Player Warps", "- 9 Homes", "- /back", "", "", "");
 
     Item rank16 = createPermissionItem(Material.GREEN_WOOL, Material.RED_WOOL,
             "Shogun",
             "cider.ranks.shogun",
-            new String[]{"100$"},
+            new String[]{"$100"},
             new String[]{"2500 claim blocks"},
             "- Has all permissions from previous rank",
             "- 10 Homes", "- /feed (no cooldown)", "- /rtp (no cooldown)", "- /fix", "", "");
 
     private Gui gui;
+    private final Map<Player, Window> playerWindows = new HashMap<>();
 
     public void openGui(Player player) {
         player.sendMessage("Opening ranks GUI...");
@@ -260,6 +278,15 @@ public class RanksGUI implements Listener {
                 .setGui(gui)
                 .build();
 
+        playerWindows.put(player, window);
         window.open();
+    }
+
+    public void closeGui(Player player) {
+        Window window = playerWindows.get(player);
+        if (window != null) {
+            window.close();
+            playerWindows.remove(player);
+        }
     }
 }

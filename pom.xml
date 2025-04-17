@@ -6,7 +6,7 @@
 
     <groupId>com.cidermc</groupId>
     <artifactId>cider-core</artifactId>
-    <version>1.0.02-Beta</version>
+    <version>1.0.04-Stable</version>
     <packaging>jar</packaging>
 
     <name>untitled</name>
