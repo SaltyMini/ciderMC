@@ -1,6 +1,5 @@
 package com.cidermc.untitled.gui;
 
-import com.google.common.hash.Hashing;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -18,7 +17,6 @@ import xyz.xenondevs.invui.window.Window;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 public class RanksGUI implements Listener {
 
@@ -249,7 +247,7 @@ public class RanksGUI implements Listener {
                 .setDisplayName("Info")
                 .addLoreLines("Welcome to rank progression", "Ranks require money (/bal) and MCMMO power level", "Balance is removed while MCMMO is not when ranking up", "- Click the rank you want to buy", "- Click the gold block to confirm your purchase", "Each rank comes with a tag, /tags to select a tag"));
 
-        double[] stats = RankPlayerHandle.stats(player);
+        double[] stats = RankPlayerHandle.getPlayerStats(player);
         final Item statsItem = new SimpleItem(new ItemBuilder(Material.BOOK)
                 .setDisplayName("Your Stats")
                 .addLoreLines(

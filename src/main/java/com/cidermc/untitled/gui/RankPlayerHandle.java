@@ -109,6 +109,15 @@ public class RankPlayerHandle implements Listener {
         return false;
     }
 
+    public static double[] getPlayerStats(Player player) {
+
+        Economy economy = Objects.requireNonNull(getServer().getServicesManager().getRegistration(Economy.class)).getProvider();
+
+        double bal = economy.getBalance(player);
+        double power = 0; //TODO: get power level from mcmmo
+
+        return new double[]{bal, power};
+    }
 
 
 
