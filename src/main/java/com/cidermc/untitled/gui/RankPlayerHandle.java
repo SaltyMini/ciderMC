@@ -1,5 +1,7 @@
 package com.cidermc.untitled.gui;
 
+import com.gmail.nossr50.datatypes.player.McMMOPlayer;
+import com.gmail.nossr50.util.player.UserManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -64,12 +66,11 @@ public class RankPlayerHandle implements Listener {
 
 
         if(requirements.length > 1) {
-            if (RankPlayerHandle.hasRequirementMCMMO(player, requirements[1])) {
+            if (hasRequirementMCMMO(player, requirements[1])) {
                 player.sendMessage("Your Power Level is not high enough to buy this rank!");
                 return true;
             }
         }
-        //TODO: CHECK THE REST OF MCMMO
 
 
         //rank the player up#
@@ -112,9 +113,10 @@ public class RankPlayerHandle implements Listener {
     public static double[] getPlayerStats(Player player) {
 
         Economy economy = Objects.requireNonNull(getServer().getServicesManager().getRegistration(Economy.class)).getProvider();
+        McMMOPlayer mcMMOPlayer = UserManager.getPlayer(player);
 
         double bal = economy.getBalance(player);
-        double power = 0; //TODO: get power level from mcmmo
+        double power = mcMMOPlayer.getPowerLevel();
 
         return new double[]{bal, power};
     }
