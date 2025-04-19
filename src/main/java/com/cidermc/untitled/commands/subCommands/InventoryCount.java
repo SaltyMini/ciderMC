@@ -45,7 +45,7 @@ public class InventoryCount extends CommandStruct {
             return;
         }
 
-        if (args[0] == null) {
+        if (args.length < 1) {
             String inventoryCount = String.valueOf(player.getInventory().getSize());
             player.sendMessage("You have: " + inventoryCount + " items in your inventory");
             return;
